@@ -4,22 +4,26 @@
   "description": "Tugas Sistem Informasi Santri",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/adyfk/Sistem-Informasi-Pondok-Pesantren.git"
+    "start": "nodemon --exec babel-node index.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/adyfk/Sistem-Informasi-Pondok-Pesantren/issues"
-  },
-  "homepage": "https://github.com/adyfk/Sistem-Informasi-Pondok-Pesantren#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "sequelize": "^5.21.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.1.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
   }
 }
