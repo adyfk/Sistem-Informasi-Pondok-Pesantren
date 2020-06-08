@@ -3,7 +3,7 @@ const app = express()
 
 app.get('/', (req, res) => {
   res.json({
-    name: 'Adi Fatkhurozi'
+    name: 'Tifa'
   })
 })
 
