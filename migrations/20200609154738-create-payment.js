@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       bill: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       integerdAt: {
         type: Sequelize.DATE
