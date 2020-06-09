@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     studentId: DataTypes.STRING,
     studentIn: DataTypes.DATE,
     studentOut: DataTypes.DATE
-  }, {});
+  }, {
+    timestamps: false
+  });
   StudentBedroom.associate = function(models) {
     // associations can be defined here
   };

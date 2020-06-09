@@ -2,11 +2,11 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('PaymentDetails', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
+      id:  {
+        allowNull: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
+        
       },
       paymentTypeId: {
         type: Sequelize.STRING
@@ -18,16 +18,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       createdAt: {
-        type: Sequelize.DATE
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   down: (queryInterface, Sequelize) => {

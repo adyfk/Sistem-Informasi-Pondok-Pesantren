@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     cost: DataTypes.INTEGER
-  }, {});
+  }, {
+    timestamps: false
+  });
   GenerationDetail.associate = function(models) {
     // associations can be defined here
   };

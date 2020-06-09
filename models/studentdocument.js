@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     fcKTP: DataTypes.STRING,
     fcAkte: DataTypes.STRING,
     photo: DataTypes.STRING
-  }, {});
+  }, {
+    timestamps: false
+  });
   StudentDocument.associate = function(models) {
     // associations can be defined here
   };

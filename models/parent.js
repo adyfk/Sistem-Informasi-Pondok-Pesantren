@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: DataTypes.INTEGER,
     email: DataTypes.STRING,
     fcKTP: DataTypes.STRING
-  }, {});
+  }, {
+    timestamps: false
+  });
   Parent.associate = function(models) {
     // associations can be defined here
   };

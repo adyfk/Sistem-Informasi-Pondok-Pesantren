@@ -4,9 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     studentId: DataTypes.STRING,
     paymentType: DataTypes.STRING,
     description: DataTypes.STRING,
-    bill: DataTypes.INTEGER,
-    integerdAt: DataTypes.DATE
-  }, {});
+    bill: DataTypes.INTEGER
+  }, {
+    updatedAt:false
+  });
   Payment.associate = function(models) {
     // associations can be defined here
   };

@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     postCode: DataTypes.INTEGER,
     phoneNumber: DataTypes.INTEGER,
     email: DataTypes.STRING
-  }, {});
+  }, {
+    timestamps: false
+  });
   Student.associate = function(models) {
     // associations can be defined here
   };

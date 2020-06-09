@@ -2,11 +2,11 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('StudentClasses', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
+      id:  {
+        allowNull: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
+        
       },
       studentId: {
         type: Sequelize.STRING
@@ -18,14 +18,6 @@ module.exports = {
         type: Sequelize.DATE
       },
       studentOut: {
-        type: Sequelize.DATE
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE
       }
     });

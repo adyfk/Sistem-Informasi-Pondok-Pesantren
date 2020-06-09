@@ -2,11 +2,11 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('GenerationDetails', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
+      id:  {
+        allowNull: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
+        
       },
       generationId: {
         type: Sequelize.STRING
@@ -19,14 +19,6 @@ module.exports = {
       },
       cost: {
         type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },

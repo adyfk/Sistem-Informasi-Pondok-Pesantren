@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     gender: DataTypes.STRING,
     capacity: DataTypes.INTEGER
-  }, {});
+  }, {
+    timestamps: false
+  });
   Bedroom.associate = function(models) {
     // associations can be defined here
   };
