@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       paid: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       createdAt: {
         type: Sequelize.DATE
