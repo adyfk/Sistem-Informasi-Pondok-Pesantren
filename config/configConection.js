@@ -1,7 +1,7 @@
-module.exports = {
+export default {
   development: {
     username: 'root',
-    password: process.env.DB_PASSWORD_ENV,
+    password: process.env.DB_PASSWORD_DEV,
     database: 'santri_management_system_dev',
     host: '127.0.0.1',
     dialect: 'mysql',

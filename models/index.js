@@ -3,7 +3,7 @@
 import fs from 'fs'
 import path from 'path'
 import Sequelize from 'sequelize'
-import configs from '../config/config' 
+import configs from '../config/configConection' 
 const env = process.env.NODE_ENV || 'development'
 const basename = path.basename(__filename)
 const config = configs[env]
