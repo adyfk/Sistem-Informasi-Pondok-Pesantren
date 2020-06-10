@@ -8,6 +8,7 @@ module.exports = {
           model: "Students",
           key: "id",
         },
+        unique: true
       },
       fcKK: {
         type: Sequelize.STRING
