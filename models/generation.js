@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Generation.associate = function(models) {
-    // associations can be defined here
+    Generation.hasMany(models.GenerationDetail,{
+      key:'id',
+      foreignKey: 'generationId'
+    })
   };
   return Generation;
 };

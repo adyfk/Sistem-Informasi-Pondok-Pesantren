@@ -7,10 +7,11 @@ module.exports = {
         type: Sequelize.STRING(50),
       },
       username: {
-        type: Sequelize.STRING(20)
+        type: Sequelize.STRING(30),
+        unique: true
       },
       password: {
-        type: Sequelize.STRING(20)
+        type: Sequelize.STRING(50)
       },
       roleId: {
         type: Sequelize.STRING(50),

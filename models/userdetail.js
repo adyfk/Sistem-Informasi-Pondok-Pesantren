@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   UserDetail.associate = function(models) {
-    // associations can be defined here
+    UserDetail.belongsTo(models.Student,{
+      foreignKey:'studentId',
+      key:'id' 
+    })
   };
   return UserDetail;
 };

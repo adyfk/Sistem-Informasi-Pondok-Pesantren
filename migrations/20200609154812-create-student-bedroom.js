@@ -13,6 +13,13 @@ module.exports = {
           key: "id",
         },
       },
+      bedroomId: {
+        type: Sequelize.STRING(50),
+        references: {
+          model: "Bedrooms",
+          key: "id",
+        },
+      },
       studentIn: {
         type: Sequelize.DATE
       },

@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   GenerationDetail.associate = function(models) {
-    // associations can be defined here
+    GenerationDetail.belongsTo(models.Generation,{
+      foreignKey: 'generationId',
+      sourceKey: 'id'
+    })
   };
   return GenerationDetail;
 };

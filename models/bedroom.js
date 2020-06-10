@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Bedroom.associate = function(models) {
-    // associations can be defined here
+    Bedroom.hasMany(models.StudentBedroom,{
+      key:'id',
+      foreignKey: 'bedroomId'
+    })
   };
   return Bedroom;
 };

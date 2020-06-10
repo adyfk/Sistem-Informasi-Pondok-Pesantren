@@ -6,8 +6,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING(50),
       },
-      description: {
-        type: Sequelize.STRING(30)
+      title: {
+        type: Sequelize.STRING(30),
+        allowNull: true
       }
     });
   },

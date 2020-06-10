@@ -10,7 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt:false
   });
   StudentDetail.associate = function(models) {
-    // associations can be defined here
+    StudentDetail.belongsTo(models.Student,{
+      foreignKey: 'studentId',
+      sourceKey: 'id'
+    })
+    StudentDetail.belongsTo(models.Generation,{
+      foreignKey: 'generationId',
+      sourceKey: 'id'
+    })
   };
   return StudentDetail;
 };

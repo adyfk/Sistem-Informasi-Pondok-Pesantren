@@ -5,12 +5,18 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type : DataTypes.STRING(50)
     },
-    description: DataTypes.STRING(30)
+    title: {
+      type : DataTypes.STRING(30),
+      allowNull: true
+    }
   }, {
     timestamps: false
   });
   PaymentType.associate = function(models) {
-    // associations can be defined here
+    Board.hasMany(models.Payment,{
+      key:'id',
+      foreignKey: 'paymentTypeId'
+    })
   };
   return PaymentType;
 };

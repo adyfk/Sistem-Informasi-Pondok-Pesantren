@@ -4,13 +4,16 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       primaryKey : true,
       type: DataTypes.STRING(50)
-     },
+    },
     title: DataTypes.STRING(20)
   }, {
     timestamps: false
   });
   Class.associate = function(models) {
-    // associations can be defined here
+    Class.hasMany(models.StudentClass,{
+      key:'id',
+      foreignKey: 'classId'
+    })
   };
   return Class;
 };

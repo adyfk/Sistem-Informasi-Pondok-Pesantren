@@ -13,7 +13,14 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   StudentClass.associate = function(models) {
-    // associations can be defined here
+    StudentClass.belongsTo(models.Student,{
+      foreignKey: 'studentId',
+      sourceKey: 'id'
+    })
+    StudentClass.belongsTo(models.Class,{
+      foreignKey: 'classId',
+      sourceKey: 'id'
+    })
   };
   return StudentClass;
 };

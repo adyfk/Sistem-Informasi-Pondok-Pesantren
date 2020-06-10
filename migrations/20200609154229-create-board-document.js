@@ -22,7 +22,7 @@ module.exports = {
       photo: {
         type: Sequelize.STRING(50)
       },
-      npwp: {
+      fcNpwp: {
         type: Sequelize.STRING(50)
       }
     });

@@ -9,12 +9,15 @@ module.exports = (sequelize, DataTypes) => {
     fcKTP: DataTypes.STRING(50),
     fcAkte: DataTypes.STRING(50),
     photo: DataTypes.STRING(50),
-    npwp: DataTypes.STRING(50)
+    fcNpwp: DataTypes.STRING(50)
   }, {
     timestamps: false
   });
   BoardDocument.associate = function(models) {
-    // associations can be defined here
+    BoardDocument.belongsTo(models.Board,{
+      foreignKey: 'boardId',
+      sourceKey: 'id'
+    })
   };
   return BoardDocument;
 };

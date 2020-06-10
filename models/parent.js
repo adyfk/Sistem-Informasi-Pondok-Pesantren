@@ -24,7 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Parent.associate = function(models) {
-    // associations can be defined here
+    Parent.belongsTo(models.Student,{
+      foreignKey: 'studentId',
+      sourceKey: 'id'
+    })
   };
   return Parent;
 };

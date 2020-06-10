@@ -13,7 +13,18 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt:false
   });
   Payment.associate = function(models) {
-    // associations can be defined here
+    Payment.hasMany(models.PaymentDetail,{
+      key:'id',
+      foreignKey: 'paymentId'
+    })
+    Payment.belongsTo(models.Student,{
+      foreignKey: 'studentId',
+      sourceKey: 'id'
+    })
+    Payment.belongsTo(models.PaymentType,{
+      foreignKey: 'paymentTypeId',
+      sourceKey: 'id'
+    })
   };
   return Payment;
 };

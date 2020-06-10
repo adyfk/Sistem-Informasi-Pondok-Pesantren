@@ -24,7 +24,14 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Board.associate = function(models) {
-    // associations can be defined here
+    Board.hasOne(models.BoardDocument,{
+      key:'id',
+      foreignKey: 'boardId'
+    })
+    Board.belongsTo(models.User,{
+      foreignKey: 'userId',
+      sourceKey: 'id'
+    })
   };
   return Board;
 };
