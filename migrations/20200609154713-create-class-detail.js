@@ -3,7 +3,11 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('ClassDetails', {
       classId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: "Classes",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: true,

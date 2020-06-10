@@ -6,10 +6,13 @@ module.exports = {
         allowNull: true,
         primaryKey: true,
         type: Sequelize.STRING,
-        
       },
       generationId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: "Generations",
+          key: "id",
+        },
       },
       title: {
         type: Sequelize.STRING

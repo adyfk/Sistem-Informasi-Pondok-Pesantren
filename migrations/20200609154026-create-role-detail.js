@@ -6,10 +6,13 @@ module.exports = {
         allowNull: true,
         primaryKey: true,
         type: Sequelize.STRING,
-        
       },
       roleId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: "Roles",
+          key: "id",
+        },
       },
       appId: {
         type: Sequelize.STRING

@@ -5,11 +5,14 @@ module.exports = {
       id:  {
         allowNull: true,
         primaryKey: true,
-        type: Sequelize.STRING,
-        
+        type: Sequelize.STRING
       },
       studentId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: "Students",
+          key: "id",
+        },
       },
       studentIn: {
         type: Sequelize.DATE

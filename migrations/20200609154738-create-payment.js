@@ -9,10 +9,18 @@ module.exports = {
         
       },
       studentId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: "Students",
+          key: "id",
+        },
       },
-      paymentType: {
-        type: Sequelize.STRING
+      paymentTypeId: {
+        type: Sequelize.STRING,
+        references: {
+          model: "PaymentTypes",
+          key: "id",
+        },
       },
       description: {
         type: Sequelize.STRING

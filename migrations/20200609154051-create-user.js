@@ -6,7 +6,6 @@ module.exports = {
         allowNull: true,
         primaryKey: true,
         type: Sequelize.STRING,
-        
       },
       username: {
         type: Sequelize.STRING
@@ -15,7 +14,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       roleId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: "Roles",
+          key: "id",
+        },
       }
     });
   },

@@ -6,7 +6,6 @@ module.exports = {
         allowNull: true,
         primaryKey: true,
         type: Sequelize.STRING,
-        
       },
       paymentTypeId: {
         type: Sequelize.STRING
