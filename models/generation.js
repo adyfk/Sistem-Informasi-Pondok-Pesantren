@@ -2,10 +2,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Generation = sequelize.define('Generation', {
     id : {
-      primarykey: true,
+      primaryKey: true,
       type: DataTypes.STRING(50)
     },
-    title: DataTypes.STRING(30)
+    title: DataTypes.STRING(20)
   }, {
     timestamps: false
   });

@@ -11,16 +11,16 @@ module.exports = {
         unique: true
       },
       fcKK: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       fcKTP: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       fcAkte: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       photo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       }
     });
   },

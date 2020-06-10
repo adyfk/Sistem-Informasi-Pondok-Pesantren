@@ -1,8 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const UserDetail = sequelize.define('UserDetail', {
-    userId: DataTypes.STRING,
-    latestLogin: { type: DataTypes.DATE, allowNull:true }, 
+    userId: DataTypes.STRING(50),
+    latestLogin: { 
+      type: DataTypes.DATE,
+      allowNull:true 
+    }, 
   }, {
     timestamps: false
   });

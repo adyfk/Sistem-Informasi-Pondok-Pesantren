@@ -3,9 +3,8 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Boards', {
       id:  {
-        allowNull: true,
         primaryKey: true,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
       },
       userId: {
         type: Sequelize.STRING,
@@ -16,28 +15,28 @@ module.exports = {
         unique: true
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       dateOfBirth: {
         type: Sequelize.DATE
       },
       gender: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(2)
       },
       address: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(35)
       },
       dorp: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(25)
       },
       district: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(25)
       },
       regency: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(25)
       },
       province: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(25)
       },
       postCode: {
         type: Sequelize.INTEGER
@@ -46,7 +45,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       }
     });
   },

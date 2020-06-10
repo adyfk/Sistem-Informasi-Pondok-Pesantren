@@ -5,10 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       type: DataTypes.STRING(50)
     },
-    generationId: {
-      unique: true,
-      type: DataTypes.STRING(50)
-    }
+    generationId: DataTypes.STRING(50)
   }, {
     updatedAt:false
   });

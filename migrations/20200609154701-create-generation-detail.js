@@ -3,22 +3,21 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('GenerationDetails', {
       id:  {
-        allowNull: true,
         primaryKey: true,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
       },
       generationId: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         references: {
           model: "Generations",
           key: "id",
         },
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(20)
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       },
       cost: {
         type: Sequelize.INTEGER

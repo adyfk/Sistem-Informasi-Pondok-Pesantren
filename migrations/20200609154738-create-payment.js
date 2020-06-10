@@ -3,27 +3,26 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Payments', {
       id:  {
-        allowNull: true,
         primaryKey: true,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         
       },
       studentId: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         references: {
           model: "Students",
           key: "id",
         },
       },
       paymentTypeId: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         references: {
           model: "PaymentTypes",
           key: "id",
         },
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       },
       bill: {
         type: Sequelize.INTEGER

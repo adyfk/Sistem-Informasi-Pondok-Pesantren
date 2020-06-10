@@ -3,7 +3,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('BoardDocuments', {
       boardId: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         references: {
           model: "Boards",
           key: "id",
@@ -11,19 +11,19 @@ module.exports = {
         unique: true
       },
       fcKK: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       fcKTP: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       fcAkte: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       photo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       npwp: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       }
     });
   },

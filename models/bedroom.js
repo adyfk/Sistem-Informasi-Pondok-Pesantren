@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Bedroom = sequelize.define('Bedroom', {
     id: {
-      primarykey: true,
+      primaryKey: true,
       type: DataTypes.STRING(50)
     },
     title: DataTypes.STRING(35),

@@ -3,12 +3,11 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('PaymentTypes', {
       id:  {
-        allowNull: true,
         primaryKey: true,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       }
     });
   },

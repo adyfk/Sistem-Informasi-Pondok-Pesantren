@@ -3,7 +3,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('StudentDetails', {
       studentId: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         references: {
           model: "Students",
           key: "id",
@@ -11,7 +11,7 @@ module.exports = {
         unique: true
       },
       generationId: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         references: {
           model: "Generations",
           key: "id",
