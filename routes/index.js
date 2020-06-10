@@ -1,4 +1,4 @@
-// import testApi_ from './ujicoba'
+import userApi from './userApi'
 // import student_ from './student'
 // import payment_ from './payment'
 // import classInfo_ from './class-info'
@@ -7,8 +7,8 @@
 // import studentManagement_ from './student-management'
 // import pondokManagement_ from './pondok-management'
 
-export default function () {
-//   app.use('/student', student_)
+export default function (app) {
+  app.use('/student', userApi)
 //   app.use('/payment', payment_)
 //   app.use('/test-api', testApi_)
 //   app.use('/class-info', classInfo_)
