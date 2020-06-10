@@ -1,8 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const StudentClass = sequelize.define('StudentClass', {
-    studentId: DataTypes.STRING,
-    classId: DataTypes.STRING,
+    id: {
+      primarykey: true,
+      type: DataTypes.STRING(50)
+    },
+    studentId: DataTypes.STRING(50),
+    classId: DataTypes.STRING(50),
     studentIn: DataTypes.DATE,
     studentOut: DataTypes.DATE
   }, {

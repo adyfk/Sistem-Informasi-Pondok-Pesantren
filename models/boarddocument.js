@@ -1,12 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const BoardDocument = sequelize.define('BoardDocument', {
-    boardId: DataTypes.STRING,
-    fcKK: DataTypes.STRING,
-    fcKTP: DataTypes.STRING,
-    fcAkte: DataTypes.STRING,
-    photo: DataTypes.STRING,
-    npwp: DataTypes.STRING
+    boardId: {
+      unique: true,
+      type: DataTypes.STRING(50)
+    },
+    fcKK: DataTypes.STRING(50),
+    fcKTP: DataTypes.STRING(50),
+    fcAkte: DataTypes.STRING(50),
+    photo: DataTypes.STRING(50),
+    npwp: DataTypes.STRING(50)
   }, {
     timestamps: false
   });

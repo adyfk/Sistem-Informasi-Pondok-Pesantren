@@ -1,8 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const StudentDetail = sequelize.define('StudentDetail', {
-    studentId: DataTypes.STRING,
-    generationId: DataTypes.STRING
+    studentId: {
+      unique: true,
+      type: DataTypes.STRING(50)
+    },
+    generationId: {
+      unique: true,
+      type: DataTypes.STRING(50)
+    }
   }, {
     updatedAt:false
   });

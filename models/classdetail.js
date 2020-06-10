@@ -1,7 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const ClassDetail = sequelize.define('ClassDetail', {
-    classId: DataTypes.STRING
+    classId: {
+      unique: true,
+      type: DataTypes.STRING(50)
+    }
   }, {
     updatedAt: false
   });

@@ -1,7 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const PaymentType = sequelize.define('PaymentType', {
-    description: DataTypes.STRING
+    id: {
+      primarykey: true,
+      type : DataTypes.STRING(50)
+    },
+    description: DataTypes.STRING(30)
   }, {
     timestamps: false
   });

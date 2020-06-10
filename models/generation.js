@@ -1,7 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Generation = sequelize.define('Generation', {
-    title: DataTypes.STRING
+    id : {
+      primarykey: true,
+      type: DataTypes.STRING(50)
+    },
+    title: DataTypes.STRING(30)
   }, {
     timestamps: false
   });
