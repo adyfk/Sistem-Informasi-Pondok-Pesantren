@@ -28,3 +28,7 @@ role:
 1: 'board_admin',
 2: 'student_admin',
 3: 'student_treasurer',
+
+
+
+sequelize-cli seed:generate --name role
