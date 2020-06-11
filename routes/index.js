@@ -8,7 +8,7 @@ import userApi from './userApi'
 // import pondokManagement_ from './pondok-management'
 
 export default function (app) {
-  app.use('/student', userApi)
+  app.use('/user', userApi)
 //   app.use('/payment', payment_)
 //   app.use('/test-api', testApi_)
 //   app.use('/class-info', classInfo_)

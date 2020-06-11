@@ -1,0 +1,7 @@
+GET http://localhost:9000/user/profile HTTP/1.1
+content-type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyIiwicm9sZSI6IjEiLCJpYXQiOjE1OTE4Njk0NzcsImV4cCI6MTU5MTg3MzA3N30.GLtUFZU_Zg_MdaBq3dssYK82Ig21aeb1Bha9BT-WkWk
+# {
+#     "username": "adi",
+#     "password": "adi"
+# }

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   PaymentType.associate = function(models) {
-    Board.hasMany(models.Payment,{
+    PaymentType.hasMany(models.Payment,{
       key:'id',
       foreignKey: 'paymentTypeId'
     })

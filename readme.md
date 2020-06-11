@@ -21,3 +21,10 @@ sequelize model:create --name PaymentType --attributes description:string
 sequelize model:create --name PaymentDetail --attributes paymentTypeId:string,description:string,paid:number,createdAt:date
 sequelize model:create --name Bedroom --attributes title:string,gender:string,capacity:integer
 sequelize model:create --name StudentBedroom --attributes studentId:string,studentIn:date,studentOut:date
+
+
+
+role: 
+1: 'board_admin',
+2: 'student_admin',
+3: 'student_treasurer',
