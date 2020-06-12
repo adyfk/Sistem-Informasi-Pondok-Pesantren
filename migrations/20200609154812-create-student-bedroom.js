@@ -24,6 +24,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       studentOut: {
+        allowNull:true,
         type: Sequelize.DATE
       }
     });
