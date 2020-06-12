@@ -39,10 +39,10 @@ module.exports = {
         type: Sequelize.STRING(25)
       },
       postCode: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING(6)
       },
       phoneNumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING(15)
       },
       email: {
         type: Sequelize.STRING(30)

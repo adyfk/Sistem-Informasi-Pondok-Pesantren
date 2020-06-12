@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     district: DataTypes.STRING(25),
     regency: DataTypes.STRING(25),
     province: DataTypes.STRING(25),
-    postCode: DataTypes.INTEGER,
-    phoneNumber: DataTypes.INTEGER,
+    postCode: DataTypes.STRING(6),
+    phoneNumber: DataTypes.STRING(15),
     email: DataTypes.STRING(30)
   }, {
     timestamps: false
