@@ -13,28 +13,34 @@ module.exports = {
     // })
     const fakeData = [
       {
-        id: '123',
+        id: '001',
         username: faker.internet.userName(),
         password: '12345',
         roleId: '1'
       },
       {
-        id: '1235',
+        id: '002',
         username: faker.internet.userName(),
         password: '12345',
         roleId: '2'
       },
       {
-        id: '1234',
+        id: '003',
         username: faker.internet.userName(),
         password: '12345',
         roleId: '3'
       },
       {
-        id: '12345',
+        id: '004',
         username: faker.internet.userName(),
         password: '12345',
         roleId: '2'
+      },
+      {
+        id: '005',
+        username: faker.internet.userName(),
+        password: '12345',
+        roleId: '1'
       }
     ]
     return queryInterface.bulkInsert('Users', fakeData, {})

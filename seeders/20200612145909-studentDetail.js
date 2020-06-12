@@ -1,16 +1,22 @@
 'use strict'
-const faker = require('faker')
-const generationId = ['G1', 'G2']
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const fakeData = Array.from({ length: 10 }).map((data, index) => {
-      return {
-        id: generationId[index],
-        title: faker.lorem.word()
+    const data = [
+      {
+        studentId: 'S1',
+        generationId: 'G1'
+      },
+      {
+        studentId: 'S2',
+        generationId: 'G1'
+      },
+      {
+        studentId: 'S3',
+        generationId: 'G2'
       }
-    })
-    return queryInterface.bulkInsert('Generations', fakeData, {})
+    ]
+    return queryInterface.bulkInsert('StudentsDetails', data, {})
   },
 
   down: (queryInterface, Sequelize) => {
