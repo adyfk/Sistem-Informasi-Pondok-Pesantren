@@ -5,25 +5,22 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     const fakeData = [
       {
-        studentdId: 'S1',
+        studentId: 'S1',
         fcKK: faker.lorem.word(),
         fcKTP: faker.lorem.word(),
-        fcAkte: faker.lorem.word(),
-        fcNpwp: faker.lorem.word()
+        fcAkte: faker.lorem.word()
       },
       {
         studentId: 'S2',
         fcKK: faker.lorem.word(),
         fcKTP: faker.lorem.word(),
-        fcAkte: faker.lorem.word(),
-        fcNpwp: faker.lorem.word()
+        fcAkte: faker.lorem.word()
       },
       {
         studentId: 'S3',
         fcKK: faker.lorem.word(),
         fcKTP: faker.lorem.word(),
-        fcAkte: faker.lorem.word(),
-        fcNpwp: faker.lorem.word()
+        fcAkte: faker.lorem.word()
       }
     ]
     return queryInterface.bulkInsert('StudentDocuments', fakeData, {})

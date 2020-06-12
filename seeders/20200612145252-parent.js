@@ -1,6 +1,5 @@
 'use strict'
 const faker = require('faker')
-const { fake } = require('faker')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -9,13 +8,13 @@ module.exports = {
         id: 'P1',
         studentId: 'S1',
         name: faker.internet.userName(),
-        dateOfBirth: new Date(1988, 6, 11).toJSON(),
+        dateOfBirth: new Date(1988, 6, 11),
         address: faker.address.streetName(),
         dorp: faker.lorem.word(),
         district: faker.address.cityPrefix(),
         regency: faker.address.city(),
         province: faker.address.county(),
-        postalCode: '57282',
+        postCode: '57282',
         phoneNumber: faker.phone.phoneNumber(),
         email: faker.internet.email(),
         fcKTP: faker.lorem.word()
@@ -24,13 +23,13 @@ module.exports = {
         id: 'P2',
         studentId: 'S2',
         name: faker.internet.userName(),
-        dateOfBirth: new Date(1985, 2, 11).toJSON(),
+        dateOfBirth: new Date(1985, 2, 11),
         address: faker.address.streetName(),
         dorp: faker.lorem.word(),
         district: faker.address.cityPrefix(),
         regency: faker.address.city(),
         province: faker.address.county(),
-        postalCode: '59222',
+        postCode: '59222',
         phoneNumber: faker.phone.phoneNumber(),
         email: faker.internet.email(),
         fcKTP: faker.lorem.word()
@@ -39,13 +38,13 @@ module.exports = {
         id: 'P3',
         studentId: 'S3',
         name: faker.internet.userName(),
-        dateOfBirth: new Date(1975, 8, 3).toJSON(),
+        dateOfBirth: new Date(1975, 8, 3),
         address: faker.address.streetName(),
         dorp: faker.lorem.word(),
         district: faker.address.cityPrefix(),
         regency: faker.address.city(),
         province: faker.address.county(),
-        postalCode: '57522',
+        postCode: '57522',
         phoneNumber: faker.phone.phoneNumber(),
         email: faker.internet.email(),
         fcKTP: faker.lorem.word()

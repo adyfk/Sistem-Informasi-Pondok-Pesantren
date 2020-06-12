@@ -16,7 +16,7 @@ module.exports = {
         generationId: 'G2'
       }
     ]
-    return queryInterface.bulkInsert('StudentsDetails', data, {})
+    return queryInterface.bulkInsert('StudentDetails', data, {})
   },
 
   down: (queryInterface, Sequelize) => {

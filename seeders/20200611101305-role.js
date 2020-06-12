@@ -4,7 +4,7 @@ const roleId = ['1', '2', '3']
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const fakeData = Array.from({ length: 10 }).map((data, index) => {
+    const fakeData = Array.from({ length: 3 }).map((data, index) => {
       return {
         id: roleId[index],
         title: faker.name.firstName(),

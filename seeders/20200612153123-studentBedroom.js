@@ -7,19 +7,19 @@ module.exports = {
         id: '1',
         studentId: 'S1',
         bedrromId: 'BR1',
-        studentIn: new Date(2019, 7, 13).toJSON()
+        studentIn: new Date(2019, 7, 13)
       },
       {
         id: '2',
         studentId: 'S2',
         bedrromId: 'BR2',
-        studentIn: new Date(2019, 7, 13).toJSON()
+        studentIn: new Date(2019, 7, 13)
       },
       {
         id: '3',
         studentId: 'S3',
         bedrromId: 'BR1',
-        studentIn: new Date(2020, 7, 13).toJSON()
+        studentIn: new Date(2020, 7, 13)
       }
     ]
     return queryInterface.bulkInsert('StudentBedrooms', data, {})

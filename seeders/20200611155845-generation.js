@@ -4,7 +4,7 @@ const generationId = ['G1', 'G2']
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const fakeData = Array.from({ length: 10 }).map((data, index) => {
+    const fakeData = Array.from({ length: 2 }).map((data, index) => {
       return {
         id: generationId[index],
         title: faker.lorem.word()
