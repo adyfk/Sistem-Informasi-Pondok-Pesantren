@@ -2,10 +2,10 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Payments', {
-      id:  {
+      id: {
         primaryKey: true,
         type: Sequelize.STRING(50),
-        
+
       },
       studentId: {
         type: Sequelize.STRING(50),
@@ -22,6 +22,7 @@ module.exports = {
         },
       },
       description: {
+        allowNull: true,
         type: Sequelize.STRING(30)
       },
       bill: {
