@@ -14,6 +14,7 @@ module.exports = {
         type: Sequelize.STRING(50)
       },
       fcKTP: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       },
       fcAkte: {

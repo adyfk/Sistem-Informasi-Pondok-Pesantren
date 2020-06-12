@@ -45,7 +45,7 @@ module.exports = {
         type: Sequelize.STRING(25)
       },
       email: {
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING(45)
       }
     });
   },

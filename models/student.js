@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     province: DataTypes.STRING(25),
     postCode: DataTypes.STRING(6),
     phoneNumber: DataTypes.INTEGER(25),
-    email: DataTypes.STRING(30)
+    email: {
+      allowNull: true,
+      type: DataTypes.STRING(45)
+    }
   }, {
     timestamps: false
   });
