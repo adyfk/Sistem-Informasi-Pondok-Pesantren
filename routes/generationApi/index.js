@@ -7,7 +7,8 @@ const router = express.Router()
 router.get('/latest', async (req, res) => {
   try {
     let Generation = await models.Generation.findOne({
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'DESC']],
+      include: ['GenerationDetails']
     })
 
     if (!Generation) {
