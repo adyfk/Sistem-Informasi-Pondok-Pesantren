@@ -1,0 +1,8 @@
+PUT http://localhost:9000/bedroom/BR1 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Melatiii",
+    "gender": "P",
+    "capacity": 12
+}
