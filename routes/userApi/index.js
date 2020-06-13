@@ -12,6 +12,7 @@ router.post('/login', async (req, res) => {
         username: req.body.username
       }
     })
+
     if (!User) {
       res.status(404)
       res.json({
@@ -19,8 +20,8 @@ router.post('/login', async (req, res) => {
           username: 'Username not found'
         }
       })
-      res.end()
     }
+
     if (User.password !== req.body.password) {
       res.status(410)
       res.json({
@@ -28,8 +29,8 @@ router.post('/login', async (req, res) => {
           password: 'Password salah'
         }
       })
-      res.end()
     }
+
     if (User) {
       const user = User
       delete user.password
@@ -45,7 +46,6 @@ router.post('/login', async (req, res) => {
     res.json({
       message: e
     })
-    res.end()
   }
 })
 

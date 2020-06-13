@@ -1,7 +1,4 @@
-export const ID = () => {
-  if (new Date().getTime() % 2) {
-    return (Math.random() + new Date().getTime()).toString(36).substr(2)
-  } else {
-    return (new Date().getTime() + Math.random()).toString(36).substr(2)
-  }
-}
+import { v4, v1 } from 'uuid'
+
+export const uuid1 = () => v1()
+export const uuid4 = () => v4()

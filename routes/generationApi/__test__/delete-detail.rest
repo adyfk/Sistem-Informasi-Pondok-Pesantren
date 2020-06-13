@@ -1,0 +1,2 @@
+DELETE http://localhost:9000/generation/detail/c932fc00-ad1d-11ea-9878-efd5d756d392 HTTP/1.1
+content-type: application/json

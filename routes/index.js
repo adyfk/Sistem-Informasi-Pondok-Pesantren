@@ -1,5 +1,5 @@
 import userApi from './userApi'
-// import student_ from './student'
+import generationApi from './generationApi'
 // import payment_ from './payment'
 // import classInfo_ from './class-info'
 // import generation_ from './generation'
@@ -9,6 +9,7 @@ import userApi from './userApi'
 
 export default function (app) {
   app.use('/user', userApi)
+  app.use('/generation', generationApi)
 //   app.use('/payment', payment_)
 //   app.use('/test-api', testApi_)
 //   app.use('/class-info', classInfo_)
