@@ -18,20 +18,24 @@ router.get('/latest', async (req, res) => {
       })
       res.status(200)
       res.json({
-        data: Generation
+        data: Generation,
+        message: 'Berhasil mengambil generasi terakhir'
       })
     }
 
     if (Generation) {
       res.status(200)
       res.json({
-        data: Generation
+        data: Generation,
+        message: 'Berhasil mengambil generasi terakhir'
       })
     }
-  } catch (e) {
-    res.status(500)
+  } catch (err) {
+    res.status(err.status || 500)
     res.json({
-      message: e
+      data: [],
+      message: err.message || 'Gagal mengambil generasi terakhir',
+      messageSystem: err
     })
   }
 })
@@ -49,41 +53,43 @@ router.post('/generate', async (req, res) => {
       })
       res.status(200)
       res.json({
-        data: newGeneration
+        data: newGeneration,
+        message: 'Berhasil meng-generate generasi'
       })
     }
 
-    if (Generation) {
-      const id = parseInt(Generation.id.slice(1)) + 1
-      const newGeneration = await models.Generation.create({
-        id: `G${id}`,
-        title: `Angakatan ${id}`
-      })
+    const id = parseInt(Generation.id.slice(1)) + 1
+    const newGeneration = await models.Generation.create({
+      id: `G${id}`,
+      title: `Angakatan ${id}`
+    })
 
-      const detailGeneration = await models.GenerationDetail.findAll({
-        where: {
-          generationId: Generation.id
-        }
-      })
-      await models.GenerationDetail.bulkCreate(
-        detailGeneration.map(data => ({
-          id: uuid1(),
-          generationId: newGeneration.id,
-          title: data.title,
-          description: data.description,
-          cost: data.cost
-        }))
-      )
+    const detailGeneration = await models.GenerationDetail.findAll({
+      where: {
+        generationId: Generation.id
+      }
+    })
+    await models.GenerationDetail.bulkCreate(
+      detailGeneration.map(data => ({
+        id: uuid1(),
+        generationId: newGeneration.id,
+        title: data.title,
+        description: data.description,
+        cost: data.cost
+      }))
+    )
 
-      res.status(200)
-      res.json({
-        data: newGeneration
-      })
-    }
-  } catch (e) {
-    res.status(500)
+    res.status(200)
     res.json({
-      message: e
+      data: newGeneration,
+      message: 'Berhasil meng-generate generasi'
+    })
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: {},
+      message: err.message || 'Gagal meng-generate generasi',
+      messageSystem: err
     })
   }
 })
@@ -95,11 +101,7 @@ router.get('/detail', async (req, res) => {
     })
 
     if (!Generation) {
-      res.status(400)
-      res.json({
-        data: []
-      })
-      return
+      throw new Error({ status: 400, message: 'Tidak ada data generasi ! Generate terlebih dahulu.' })
     }
 
     const GenerationDetail = await models.GenerationDetail.findAll({
@@ -109,23 +111,19 @@ router.get('/detail', async (req, res) => {
     })
 
     if (!GenerationDetail) {
-      res.status(400)
-      res.json({
-        data: []
-      })
-      return
+      throw new Error({ status: 404, message: 'Detail generasi tidak di temukan!' })
     }
 
-    if (GenerationDetail) {
-      res.status(200)
-      res.json({
-        data: GenerationDetail
-      })
-    }
-  } catch (e) {
-    res.status(500)
+    res.status(200)
     res.json({
-      message: e
+      data: GenerationDetail
+    })
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: [],
+      message: err.message || 'Gagal mengambil detail generasi',
+      messageSystem: err
     })
   }
 })
@@ -137,12 +135,9 @@ router.post('/detail', async (req, res) => {
     })
 
     if (!Generation) {
-      res.status(400)
-      res.json({
-        message: 'Tolonog generate generasi dulu'
-      })
-      return
+      throw new Error({ status: 400, message: 'Tidak ada data generasi ! Generate terlebih dahulu.' })
     }
+
     // body = {title,description,cost}
     const GenerationDetail = await models.GenerationDetail.create({
       id: uuid1(),
@@ -151,23 +146,20 @@ router.post('/detail', async (req, res) => {
     })
 
     if (!GenerationDetail) {
-      res.status(400)
-      res.json({
-        message: 'Gagal Menambah detail'
-      })
-      return
+      throw new Error({ status: 400 })
     }
 
-    if (GenerationDetail) {
-      res.status(200)
-      res.json({
-        data: GenerationDetail
-      })
-    }
-  } catch (e) {
-    res.status(500)
+    res.status(200)
     res.json({
-      message: e
+      data: GenerationDetail,
+      message: 'Berhasil mengambil detail generasi'
+    })
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: {},
+      message: err.message || 'Gagal menambah detail generasi',
+      messageSystem: err
     })
   }
 })
@@ -181,24 +173,21 @@ router.put('/detail/:id', async (req, res) => {
       }
     })
     if (!result) {
-      res.status(400)
-      res.json({
-        message: 'Gagal Mengubah detail'
-      })
-      return
+      throw new Error({ status: 400 })
     }
 
-    if (result[0]) {
-      const generationDetail = await models.GenerationDetail.findByPk(req.params.id)
-      res.status(200)
-      res.json({
-        data: generationDetail
-      })
-    }
-  } catch (e) {
-    res.status(500)
+    const generationDetail = await models.GenerationDetail.findByPk(req.params.id)
+    res.status(200)
     res.json({
-      message: e
+      data: generationDetail,
+      message: `Berhasil men-update detail generasi ${req.params.id}`
+    })
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: {},
+      message: err.message || `Gagal men-update detail generasi ${req.params.id}`,
+      messageSystem: err
     })
   }
 })
@@ -211,29 +200,26 @@ router.delete('/detail/:id', async (req, res) => {
         id: req.params.id
       }
     })
+
     if (!result) {
-      res.status(400)
-      res.json({
-        message: 'Gagal Menghapus detail'
-      })
-      return
+      throw new Error({ status: 400 })
     }
 
-    if (result) {
-      console.log('smpe sini')
-      const generationDetail = await req.uest({
-        method: 'GET',
-        url: '/generation/detail'
-      })
-      res.status(200)
-      res.json({
-        data: generationDetail.body.data
-      })
-    }
-  } catch (e) {
-    res.status(500)
+    const generationDetail = await req.uest({
+      method: 'GET',
+      url: '/generation/detail'
+    })
+    res.status(200)
     res.json({
-      message: e
+      data: generationDetail.body.data,
+      message: `Berhasil meng-hapus detail generasi ${req.params.id}`
+    })
+  } catch (err) {
+    res.status(err.status || 400)
+    res.json({
+      data: [],
+      message: err.message || `Gagal meng-hapus detail generasi ${req.params.id}`,
+      messageSystem: err
     })
   }
 })

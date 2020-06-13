@@ -8,22 +8,22 @@ const router = express.Router()
 router.get('/', async (req, res) => {
   try {
     const bedrooms = await models.Bedroom.findAll()
+
     if (!bedrooms) {
-      res.status(400)
-      res.json({
-        data: bedrooms
-      })
+      throw new Error({ status: 404, message: 'Bedroom tidak ditemukan' })
     }
-    if (bedrooms) {
-      res.status(200)
-      res.json({
-        data: bedrooms
-      })
-    }
-  } catch (e) {
-    res.status(500)
+
+    res.status(200)
     res.json({
-      message: e
+      data: bedrooms,
+      message: 'Berhasil mengambil bedroom'
+    })
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: [],
+      message: err.message || 'Gagal mengambil bedroom',
+      messageSystem: err
     })
   }
 })
@@ -31,21 +31,20 @@ router.get('/:id', async (req, res) => {
   try {
     const bedroom = await models.Bedroom.findByPk(req.params.id)
     if (!bedroom) {
-      res.status(400)
-      res.json({
-        data: bedroom
-      })
+      throw new Error({ status: 404, message: 'Bedroom tidak di temukan!' })
     }
-    if (bedroom) {
-      res.status(200)
-      res.json({
-        data: bedroom
-      })
-    }
-  } catch (e) {
-    res.status(500)
+
+    res.status(200)
     res.json({
-      message: e
+      data: bedroom,
+      message: 'Berhasil meng-ambil bedroom'
+    })
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: {},
+      message: err.message || 'Gagal mengambil bedroom',
+      messageSystem: err
     })
   }
 })
@@ -58,32 +57,29 @@ router.put('/:id', async (req, res) => {
         id: req.params.id
       }
     })
-    console.log(Bedroom, body)
     // respond dari update adalah array
     // saat tidak ada perubahan data maka akan respond false
     // [0] === 0 === false => artinya gagal
     // [0] === 1 === true => artinya berhasil
     if (!Bedroom[0]) {
-      res.status(400)
-      res.json({
-        data: Bedroom
-      })
+      throw new Error({ status: 404, message: 'Bedroom tidak ditemukan' })
     }
 
-    if (Bedroom[0]) {
-      const afterUpdate = await req.uest({
-        method: 'GET',
-        url: `/${req.params.id}`
-      })
-      res.status(200)
-      res.json({
-        data: afterUpdate
-      })
-    }
-  } catch (e) {
-    res.status(500)
+    const afterUpdate = await req.uest({
+      method: 'GET',
+      url: `/${req.params.id}`
+    })
+    res.status(200)
     res.json({
-      message: e
+      data: afterUpdate,
+      message: 'Berhasil meng-update bedroom'
+    })
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: {},
+      message: err.message || 'Gagal meng-update bedroom',
+      messageSystem: err
     })
   }
 })
@@ -97,22 +93,20 @@ router.post('/', async (req, res) => {
     const Bedroom = await models.Bedroom.create(body)
 
     if (!Bedroom) {
-      res.status(400)
-      res.json({
-        data: Bedroom
-      })
+      throw new Error({ status: 404 })
     }
 
-    if (Bedroom) {
-      res.status(200)
-      res.json({
-        data: Bedroom
-      })
-    }
-  } catch (e) {
-    res.status(500)
+    res.status(200)
     res.json({
-      message: e
+      data: Bedroom,
+      message: 'Berhasil menambah bedroom'
+    })
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: {},
+      message: err.message || 'Gagal menambah bedroom',
+      messageSystem: err
     })
   }
 })

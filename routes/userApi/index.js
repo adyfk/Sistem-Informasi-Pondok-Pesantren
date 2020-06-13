@@ -14,19 +14,19 @@ router.post('/login', async (req, res) => {
     })
 
     if (!User) {
-      res.status(404)
-      res.json({
+      throw new Error({
+        status: 400,
         message: {
-          username: 'Username not found'
+          username: 'Username anda tidak ditemukan'
         }
       })
     }
 
     if (User.password !== req.body.password) {
-      res.status(410)
-      res.json({
+      throw new Error({
+        status: 410,
         message: {
-          password: 'Password salah'
+          password: 'Password yang Anda inputkan salah!'
         }
       })
     }
@@ -38,34 +38,41 @@ router.post('/login', async (req, res) => {
         token: generateToken({
           id: User.id,
           roleId: User.roleId
-        })
+        }),
+        message: 'Berhasil login'
       })
     }
-  } catch (e) {
-    res.status(500)
+  } catch (err) {
+    res.status(err.status || 500)
     res.json({
-      message: e
+      data: {},
+      message: err.message || 'Gagal login',
+      messageSystem: err
     })
   }
 })
 
 router.get('/profile', auth, async (req, res) => {
-  switch (res.user.roleId) {
-    case 2: {
-      try {
+  try {
+    switch (res.user.roleId) {
+      case 2: {
         const Student = await getStudentByUserId({ userId: req.user.id })
+
         res.status(200)
         res.json({
-          data: Student
+          data: Student,
+          message: 'Berhasil menagmbil data profile'
         })
-      } catch (e) {
-        res.status(400)
-        res.json({
-          message: 'Student Not Found'
-        })
+        break
       }
-      break
     }
+  } catch (err) {
+    res.status(err.status || 500)
+    res.json({
+      data: {},
+      message: err.message || 'Gagal mengambil data profile',
+      messageSystem: err
+    })
   }
 })
 
