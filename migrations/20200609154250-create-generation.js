@@ -9,6 +9,11 @@ module.exports = {
       title: {
         type: Sequelize.STRING(20)
       },
+      createdAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

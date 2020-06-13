@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING(20)
   }, {
-    timestamps: false
+    updatedAt: false
   });
   Generation.associate = function(models) {
     Generation.hasMany(models.GenerationDetail,{
