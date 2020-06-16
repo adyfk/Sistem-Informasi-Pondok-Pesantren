@@ -14,32 +14,32 @@ module.exports = {
     const fakeData = [
       {
         id: '001',
-        username: faker.internet.userName(),
-        password: '12345',
+        username: 'adyfkz',
+        password: '123456',
         roleId: '1'
       },
       {
         id: '002',
         username: faker.internet.userName(),
-        password: '12345',
+        password: '123456',
         roleId: '2'
       },
       {
         id: '003',
         username: faker.internet.userName(),
-        password: '12345',
+        password: '123456',
         roleId: '3'
       },
       {
         id: '004',
         username: faker.internet.userName(),
-        password: '12345',
+        password: '123456',
         roleId: '2'
       },
       {
         id: '005',
         username: faker.internet.userName(),
-        password: '12345',
+        password: '123456',
         roleId: '1'
       }
     ]
