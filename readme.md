@@ -7,6 +7,7 @@ Tugas Sistem Informasi Santri
 
     DB_PASSWORD_DEV=sesuai_pass_db
     JWT_PRIVATE_KEY=bebas
+    AUTH_MIDDLEWARE=0
 
 *** isi sesuai kebutuhan
 
