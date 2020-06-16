@@ -1,8 +1,7 @@
-PUT http://localhost:9000/bedroom/BR1 HTTP/1.1
+PUT http://localhost:9000/class/C2 HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Melatiii",
-    "gender": "P",
-    "capacity": 12
+    "title": "Mela33ti",
+    "cost": 20000
 }

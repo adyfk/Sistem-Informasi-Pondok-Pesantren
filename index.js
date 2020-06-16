@@ -8,11 +8,12 @@ import uest from 'uest'
 
 dotenv.config()
 const app = express()
+
 app.use(uest())
+app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
-app.use(express.json())
 
 routers(app)
 

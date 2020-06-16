@@ -5,31 +5,38 @@ module.exports = {
     const data = [
       {
         id: 'C1',
-        title: 'Shifir'
+        title: 'Shifir',
+        cost: 25000
       },
       {
         id: 'C2',
-        title: 'Awaliyah I'
+        title: 'Awaliyah I',
+        cost: 25000
       },
       {
         id: 'C3',
-        title: 'Awaliyah II'
+        title: 'Awaliyah II',
+        cost: 25000
       },
       {
         id: 'C4',
-        title: 'Awaliyah III'
+        title: 'Awaliyah III',
+        cost: 25000
       },
       {
         id: 'C5',
-        title: 'Awaliyah IV'
+        title: 'Awaliyah IV',
+        cost: 25000
       },
       {
         id: 'C6',
-        title: 'Awaliyah V'
+        title: 'Awaliyah V',
+        cost: 25000
       },
       {
         id: 'C7',
-        title: 'Awaliyah VI'
+        title: 'Awaliyah VI',
+        cost: 25000
       }
     ]
     return queryInterface.bulkInsert('Classes', data, {})

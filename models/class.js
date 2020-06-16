@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey : true,
       type: DataTypes.STRING(50)
     },
-    title: DataTypes.STRING(20)
+    title: DataTypes.STRING(20),
+    cost: DataTypes.INTEGER()
   }, {
     timestamps: false
   });

@@ -17,10 +17,12 @@ export default function (req, res, next) {
     req.user = decoded
     next()
   } catch (ex) {
-    if (process.env.AUTH_MIDDLEWARE !== '0') {
-      res.status(401).json({
-        message: 'Invalid Token.'
-      })
+    if (process.env.AUTH_MIDDLEWARE === '0') {
+      next()
+      return
     }
+    res.status(401).json({
+      message: 'Invalid Token.'
+    })
   }
 }

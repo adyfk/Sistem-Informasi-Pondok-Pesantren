@@ -7,8 +7,12 @@ module.exports = {
         type: Sequelize.STRING(50),
       },
       title: {
+        allowNull:true,
         type: Sequelize.STRING(20)
       },
+      cost:{
+        type: Sequelize.INTEGER()
+      }
     });
   },
   down: (queryInterface, Sequelize) => {

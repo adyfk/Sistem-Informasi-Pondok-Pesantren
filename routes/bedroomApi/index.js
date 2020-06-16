@@ -53,19 +53,11 @@ router.put('/:id', async (req, res) => {
   try {
     const body = { ...req.body }
     delete body.id
-    const Bedroom = await models.Bedroom.update(body, {
+    await models.Bedroom.update(body, {
       where: {
         id: req.params.id
       }
     })
-    console.log(Bedroom)
-    // respond dari update adalah array
-    // saat tidak ada perubahan data maka akan respond false
-    // [0] === 0 === false => artinya gagal
-    // [0] === 1 === true => artinya berhasil
-    // if (!Bedroom[0]) {
-    //   throw new ReqException({ status: 404, message: 'Bedroom tidak ditemukan' })
-    // }
 
     const afterUpdate = await req.uest({
       headers: {

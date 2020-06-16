@@ -3,49 +3,48 @@ import models from '../../models'
 import { uuid1 } from '../../utils/common'
 import { ReqException, checkErrorRequest } from '../../utils/exception'
 import auth from '../../middleware/auth'
-// import { uuid1 } from '../../utils/common'
 
 const router = express.Router()
 
 router.get('/', auth, async (req, res) => {
   try {
-    const bedrooms = await models.Bedroom.findAll()
+    const classes = await models.Class.findAll()
 
-    if (!bedrooms) {
-      throw new ReqException({ status: 404, message: 'Bedroom tidak ditemukan' })
+    if (!classes) {
+      throw new ReqException({ status: 404, message: 'class tidak ditemukan' })
     }
 
     res.status(200)
     res.json({
-      data: bedrooms,
-      message: 'Berhasil mengambil bedroom'
+      data: classes,
+      message: 'Berhasil mengambil class'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: [],
-      message: err.message || 'Gagal mengambil bedroom',
+      message: err.message || 'Gagal mengambil class',
       messageSystem: checkErrorRequest(err)
     })
   }
 })
 router.get('/:id', auth, async (req, res) => {
   try {
-    const bedroom = await models.Bedroom.findByPk(req.params.id)
-    if (!bedroom) {
-      throw new ReqException({ status: 404, message: 'Bedroom tidak di temukan!' })
+    const classX = await models.Class.findByPk(req.params.id)
+    if (!classX) {
+      throw new ReqException({ status: 404, message: 'class tidak di temukan!' })
     }
 
     res.status(200)
     res.json({
-      data: bedroom,
-      message: 'Berhasil meng-ambil bedroom'
+      data: classX,
+      message: 'Berhasil meng-ambil class'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal mengambil bedroom',
+      message: err.message || 'Gagal mengambil class',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -54,36 +53,29 @@ router.put('/:id', auth, async (req, res) => {
   try {
     const body = { ...req.body }
     delete body.id
-    const Bedroom = await models.Bedroom.update(body, {
+    await models.Class.update(body, {
       where: {
         id: req.params.id
       }
     })
-    // respond dari update adalah array
-    // saat tidak ada perubahan data maka akan respond false
-    // [0] === 0 === false => artinya gagal
-    // [0] === 1 === true => artinya berhasil
-    if (!Bedroom[0]) {
-      throw new ReqException({ status: 404, message: 'Bedroom tidak ditemukan' })
-    }
 
     const afterUpdate = await req.uest({
       headers: {
         authorization: req.authorization
       },
       method: 'GET',
-      url: `/${req.params.id}`
+      url: `/class/${req.params.id}`
     })
     res.status(200)
     res.json({
-      data: afterUpdate,
-      message: 'Berhasil meng-update bedroom'
+      data: afterUpdate.body.data,
+      message: 'Berhasil meng-update class'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal meng-update bedroom',
+      message: err.message || 'Gagal meng-update class',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -95,22 +87,22 @@ router.post('/', auth, async (req, res) => {
       id: uuid1()
     }
 
-    const Bedroom = await models.Bedroom.create(body)
+    const classX = await models.Class.create(body)
 
-    if (!Bedroom) {
-      throw new ReqException({ status: 404 })
+    if (!classX) {
+      throw new ReqException({ status: 404, message: 'Gagal membuat class !' })
     }
 
     res.status(200)
     res.json({
-      data: Bedroom,
-      message: 'Berhasil menambah bedroom'
+      data: classX,
+      message: 'Berhasil menambah class'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal menambah bedroom',
+      message: err.message || 'Gagal menambah class',
       messageSystem: checkErrorRequest(err)
     })
   }
