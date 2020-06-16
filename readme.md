@@ -3,11 +3,10 @@ Tugas Sistem Informasi Santri
 ** Mysql
 ** NodeJS 
 
-** tambah file baru 
+** tambah file baru di root folder bernama .env 
 
-    .env => 
-    DB_PASSWORD_DEV=
-    JWT_PRIVATE_KEY=
+    DB_PASSWORD_DEV=sesuai_pass_db
+    JWT_PRIVATE_KEY=bebas
 
 *** isi sesuai kebutuhan
 
