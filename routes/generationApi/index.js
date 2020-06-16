@@ -208,6 +208,9 @@ router.delete('/detail/:id', auth, async (req, res) => {
     }
 
     const generationDetail = await req.uest({
+      headers: {
+        authorization: req.authorization
+      },
       method: 'GET',
       url: '/generation/detail'
     })

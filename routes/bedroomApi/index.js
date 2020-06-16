@@ -58,21 +58,25 @@ router.put('/:id', async (req, res) => {
         id: req.params.id
       }
     })
+    console.log(Bedroom)
     // respond dari update adalah array
     // saat tidak ada perubahan data maka akan respond false
     // [0] === 0 === false => artinya gagal
     // [0] === 1 === true => artinya berhasil
-    if (!Bedroom[0]) {
-      throw new ReqException({ status: 404, message: 'Bedroom tidak ditemukan' })
-    }
+    // if (!Bedroom[0]) {
+    //   throw new ReqException({ status: 404, message: 'Bedroom tidak ditemukan' })
+    // }
 
     const afterUpdate = await req.uest({
+      headers: {
+        authorization: req.authorization
+      },
       method: 'GET',
-      url: `/${req.params.id}`
+      url: `/bedroom/${req.params.id}`
     })
     res.status(200)
     res.json({
-      data: afterUpdate,
+      data: afterUpdate.body.data,
       message: 'Berhasil meng-update bedroom'
     })
   } catch (err) {

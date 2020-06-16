@@ -11,10 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     photo: DataTypes.STRING(50),
     fcNpwp: DataTypes.STRING(50)
   }, {
-    timestamps: false
+    timestamps: false,
   });
-  BoardDocument.associate = function(models) {
-    BoardDocument.belongsTo(models.Board,{
+  BoardDocument.removeAttribute('id')
+  BoardDocument.associate = function (models) {
+    BoardDocument.belongsTo(models.Board, {
       foreignKey: 'boardId',
       sourceKey: 'id'
     })

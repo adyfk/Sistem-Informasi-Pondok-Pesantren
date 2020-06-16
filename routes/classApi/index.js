@@ -2,11 +2,12 @@ import express from 'express'
 import models from '../../models'
 import { uuid1 } from '../../utils/common'
 import { ReqException, checkErrorRequest } from '../../utils/exception'
+import auth from '../../middleware/auth'
 // import { uuid1 } from '../../utils/common'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const bedrooms = await models.Bedroom.findAll()
 
@@ -28,7 +29,7 @@ router.get('/', async (req, res) => {
     })
   }
 })
-router.get('/:id', async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
     const bedroom = await models.Bedroom.findByPk(req.params.id)
     if (!bedroom) {
@@ -49,7 +50,7 @@ router.get('/:id', async (req, res) => {
     })
   }
 })
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
     const body = { ...req.body }
     delete body.id
@@ -67,6 +68,9 @@ router.put('/:id', async (req, res) => {
     }
 
     const afterUpdate = await req.uest({
+      headers: {
+        authorization: req.authorization
+      },
       method: 'GET',
       url: `/${req.params.id}`
     })
@@ -84,7 +88,7 @@ router.put('/:id', async (req, res) => {
     })
   }
 })
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
     const body = {
       ...req.body,

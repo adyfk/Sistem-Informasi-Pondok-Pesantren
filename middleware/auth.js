@@ -4,13 +4,8 @@ import { verifyToken } from '../utils/jwt_auth'
 dotenv.config()
 
 export default function (req, res, next) {
-  if (process.env.AUTH_MIDDLEWARE === '0') {
-    next()
-    return
-  }
-
   const token = req.header('Authorization')
-  if (!token) {
+  if (!token && process.env.AUTH_MIDDLEWARE !== '0') {
     return res.status(401).json({
       message: 'Access denied. No token provided.'
     })
@@ -18,11 +13,14 @@ export default function (req, res, next) {
 
   try {
     const decoded = verifyToken(token)
+    req.authorization = req.header('Authorization')
     req.user = decoded
     next()
   } catch (ex) {
-    res.status(401).json({
-      message: 'Invalid Token.'
-    })
+    if (process.env.AUTH_MIDDLEWARE !== '0') {
+      res.status(401).json({
+        message: 'Invalid Token.'
+      })
+    }
   }
 }

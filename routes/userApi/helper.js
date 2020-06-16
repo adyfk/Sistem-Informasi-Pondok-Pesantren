@@ -1,10 +1,26 @@
 import models from '../../models'
 
 export function getStudentByUserId ({ userId }) {
-  return models.students.findOne({
+  return models.Student.findOne({
+    attributes: ['name'],
     where: {
       userId
     },
-    include: ['StudentDocument']
+    include: [{
+      model: models.StudentDocuments,
+      attributes: ['photo']
+    }]
+  })
+}
+export function getBoardByUserId ({ userId }) {
+  return models.Board.findOne({
+    attributes: ['name'],
+    where: {
+      userId
+    },
+    include: [{
+      model: models.BoardDocument,
+      attributes: ['photo']
+    }]
   })
 }
