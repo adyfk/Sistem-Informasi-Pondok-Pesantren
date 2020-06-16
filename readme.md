@@ -1,5 +1,38 @@
 Tugas Sistem Informasi Santri
 
+** Mysql
+** NodeJS 
+
+** tambah file baru 
+.env => 
+    DB_PASSWORD_DEV=
+    JWT_PRIVATE_KEY=
+
+*** isi sesuai kebutuhan
+
+** install sequelize-cli global
+    npm i -g sequelize-cli
+    npm i
+
+run 
+**
+    sequelize db:create
+    sequelize db:migrate
+    sequelize db:seed:all
+
+**
+    npm run start
+
+code formater dengan eslint
+
+
+
+
+
+
+
+
+
 sequelize model:create --name App --attributes roleId:string,description:string
 
 
