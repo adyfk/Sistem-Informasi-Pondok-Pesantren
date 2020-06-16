@@ -1,10 +1,12 @@
 import express from 'express'
 import models from '../../models'
 import { uuid1 } from '../../utils/common'
+import { ReqException, checkErrorRequest } from '../../utils/exception'
+import auth from '../../middleware/auth'
 
 const router = express.Router()
 
-router.get('/latest', async (req, res) => {
+router.get('/latest', auth, auth, async (req, res) => {
   try {
     let Generation = await models.Generation.findOne({
       order: [['createdAt', 'DESC']],
@@ -35,12 +37,12 @@ router.get('/latest', async (req, res) => {
     res.json({
       data: [],
       message: err.message || 'Gagal mengambil generasi terakhir',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
 
-router.post('/generate', async (req, res) => {
+router.post('/generate', auth, async (req, res) => {
   try {
     const Generation = await models.Generation.findOne({
       order: [['createdAt', 'DESC']]
@@ -89,19 +91,19 @@ router.post('/generate', async (req, res) => {
     res.json({
       data: {},
       message: err.message || 'Gagal meng-generate generasi',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
 
-router.get('/detail', async (req, res) => {
+router.get('/detail', auth, async (req, res) => {
   try {
     const Generation = await models.Generation.findOne({
       order: [['createdAt', 'DESC']]
     })
 
     if (!Generation) {
-      throw new Error({ status: 400, message: 'Tidak ada data generasi ! Generate terlebih dahulu.' })
+      throw new ReqException({ status: 400, message: 'Tidak ada data generasi ! Generate terlebih dahulu.' })
     }
 
     const GenerationDetail = await models.GenerationDetail.findAll({
@@ -111,7 +113,7 @@ router.get('/detail', async (req, res) => {
     })
 
     if (!GenerationDetail) {
-      throw new Error({ status: 404, message: 'Detail generasi tidak di temukan!' })
+      throw new ReqException({ status: 404, message: 'Detail generasi tidak di temukan!' })
     }
 
     res.status(200)
@@ -123,19 +125,19 @@ router.get('/detail', async (req, res) => {
     res.json({
       data: [],
       message: err.message || 'Gagal mengambil detail generasi',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
 
-router.post('/detail', async (req, res) => {
+router.post('/detail', auth, async (req, res) => {
   try {
     const Generation = await models.Generation.findOne({
       order: [['createdAt', 'DESC']]
     })
 
     if (!Generation) {
-      throw new Error({ status: 400, message: 'Tidak ada data generasi ! Generate terlebih dahulu.' })
+      throw new ReqException({ status: 400, message: 'Tidak ada data generasi ! Generate terlebih dahulu.' })
     }
 
     // body = {title,description,cost}
@@ -146,7 +148,7 @@ router.post('/detail', async (req, res) => {
     })
 
     if (!GenerationDetail) {
-      throw new Error({ status: 400 })
+      throw new ReqException({ status: 400 })
     }
 
     res.status(200)
@@ -159,11 +161,11 @@ router.post('/detail', async (req, res) => {
     res.json({
       data: {},
       message: err.message || 'Gagal menambah detail generasi',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
-router.put('/detail/:id', async (req, res) => {
+router.put('/detail/:id', auth, async (req, res) => {
   try {
     const body = { ...req.body }
     delete body.generationId
@@ -173,7 +175,7 @@ router.put('/detail/:id', async (req, res) => {
       }
     })
     if (!result) {
-      throw new Error({ status: 400 })
+      throw new ReqException({ status: 400 })
     }
 
     const generationDetail = await models.GenerationDetail.findByPk(req.params.id)
@@ -187,11 +189,11 @@ router.put('/detail/:id', async (req, res) => {
     res.json({
       data: {},
       message: err.message || `Gagal men-update detail generasi ${req.params.id}`,
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
-router.delete('/detail/:id', async (req, res) => {
+router.delete('/detail/:id', auth, async (req, res) => {
   try {
     const body = { ...req.body }
     delete body.generationId
@@ -202,7 +204,7 @@ router.delete('/detail/:id', async (req, res) => {
     })
 
     if (!result) {
-      throw new Error({ status: 400 })
+      throw new ReqException({ status: 400 })
     }
 
     const generationDetail = await req.uest({
@@ -219,7 +221,7 @@ router.delete('/detail/:id', async (req, res) => {
     res.json({
       data: [],
       message: err.message || `Gagal meng-hapus detail generasi ${req.params.id}`,
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })

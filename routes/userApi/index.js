@@ -3,6 +3,7 @@ import models from '../../models'
 import { generateToken } from '../../utils/jwt_auth'
 import auth from '../../middleware/auth'
 import { getStudentByUserId } from './helper'
+import { ReqException, checkErrorRequest } from '../../utils/exception'
 const router = express.Router()
 
 router.post('/login', async (req, res) => {
@@ -14,7 +15,7 @@ router.post('/login', async (req, res) => {
     })
 
     if (!User) {
-      throw new Error({
+      throw new ReqException({
         status: 400,
         message: {
           username: 'Username anda tidak ditemukan'
@@ -23,7 +24,7 @@ router.post('/login', async (req, res) => {
     }
 
     if (User.password !== req.body.password) {
-      throw new Error({
+      throw new ReqException({
         status: 410,
         message: {
           password: 'Password yang Anda inputkan salah!'
@@ -47,7 +48,7 @@ router.post('/login', async (req, res) => {
     res.json({
       data: {},
       message: err.message || 'Gagal login',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
@@ -71,7 +72,7 @@ router.get('/profile', auth, async (req, res) => {
     res.json({
       data: {},
       message: err.message || 'Gagal mengambil data profile',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })

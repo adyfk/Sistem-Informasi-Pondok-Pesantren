@@ -8,8 +8,9 @@ export const getDecodeToken = (token, config = { complete: true }) => {
 }
 // async
 export const verifyToken = (token) => {
+  const getToken = token.replace(/Bearer /, '')
   const privateKey = process.env.JWT_PRIVATE_KEY
-  return jwt.verify(token, privateKey)
+  return jwt.verify(getToken, privateKey)
 }
 export const generateToken = (data, config = { expiresIn: '1h' }) => {
   const privateKey = process.env.JWT_PRIVATE_KEY

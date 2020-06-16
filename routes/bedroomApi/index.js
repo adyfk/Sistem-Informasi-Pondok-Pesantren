@@ -1,6 +1,7 @@
 import express from 'express'
 import models from '../../models'
 import { uuid1 } from '../../utils/common'
+import { ReqException, checkErrorRequest } from '../../utils/exception'
 // import { uuid1 } from '../../utils/common'
 
 const router = express.Router()
@@ -10,7 +11,7 @@ router.get('/', async (req, res) => {
     const bedrooms = await models.Bedroom.findAll()
 
     if (!bedrooms) {
-      throw new Error({ status: 404, message: 'Bedroom tidak ditemukan' })
+      throw new ReqException({ status: 404, message: 'Bedroom tidak ditemukan' })
     }
 
     res.status(200)
@@ -23,7 +24,7 @@ router.get('/', async (req, res) => {
     res.json({
       data: [],
       message: err.message || 'Gagal mengambil bedroom',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
@@ -31,7 +32,7 @@ router.get('/:id', async (req, res) => {
   try {
     const bedroom = await models.Bedroom.findByPk(req.params.id)
     if (!bedroom) {
-      throw new Error({ status: 404, message: 'Bedroom tidak di temukan!' })
+      throw new ReqException({ status: 404, message: 'Bedroom tidak di temukan!' })
     }
 
     res.status(200)
@@ -44,7 +45,7 @@ router.get('/:id', async (req, res) => {
     res.json({
       data: {},
       message: err.message || 'Gagal mengambil bedroom',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
@@ -62,7 +63,7 @@ router.put('/:id', async (req, res) => {
     // [0] === 0 === false => artinya gagal
     // [0] === 1 === true => artinya berhasil
     if (!Bedroom[0]) {
-      throw new Error({ status: 404, message: 'Bedroom tidak ditemukan' })
+      throw new ReqException({ status: 404, message: 'Bedroom tidak ditemukan' })
     }
 
     const afterUpdate = await req.uest({
@@ -79,7 +80,7 @@ router.put('/:id', async (req, res) => {
     res.json({
       data: {},
       message: err.message || 'Gagal meng-update bedroom',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
@@ -93,7 +94,7 @@ router.post('/', async (req, res) => {
     const Bedroom = await models.Bedroom.create(body)
 
     if (!Bedroom) {
-      throw new Error({ status: 404 })
+      throw new ReqException({ status: 404 })
     }
 
     res.status(200)
@@ -106,7 +107,7 @@ router.post('/', async (req, res) => {
     res.json({
       data: {},
       message: err.message || 'Gagal menambah bedroom',
-      messageSystem: err
+      messageSystem: checkErrorRequest(err)
     })
   }
 })
