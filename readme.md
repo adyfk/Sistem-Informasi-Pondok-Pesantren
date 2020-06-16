@@ -49,3 +49,6 @@ role:
 sequelize-cli seed:generate --name role
 
 https://stackoverflow.com/questions/42870374/node-js-7-how-to-use-sequelize-transaction-with-async-await/48675466   
+
+
+new data
