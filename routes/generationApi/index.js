@@ -35,7 +35,7 @@ router.get('/latest', auth, auth, async (req, res) => {
   } catch (err) {
     res.status(err.status || 500)
     res.json({
-      data: [],
+      data: {},
       message: err.message || 'Gagal mengambil generasi terakhir',
       messageSystem: checkErrorRequest(err)
     })

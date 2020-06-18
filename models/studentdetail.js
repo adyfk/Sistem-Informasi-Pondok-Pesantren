@@ -5,10 +5,11 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       type: DataTypes.STRING(50)
     },
-    generationId: DataTypes.STRING(50)
+    generationId: DataTypes.STRING(50),
   }, {
-    updatedAt:false
+    timestamps: false
   });
+  StudentDetail.removeAttribute('id')
   StudentDetail.associate = function(models) {
     StudentDetail.belongsTo(models.Student,{
       foreignKey: 'studentId',

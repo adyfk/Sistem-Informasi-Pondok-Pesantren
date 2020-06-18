@@ -51,24 +51,13 @@ router.get('/:id', async (req, res) => {
 })
 router.put('/:id', async (req, res) => {
   try {
-    const body = { ...req.body }
-    delete body.id
-    await models.Bedroom.update(body, {
-      where: {
-        id: req.params.id
-      }
-    })
+    const bedroom = await models.Bedroom.findByPk(req.params.id)
 
-    const afterUpdate = await req.uest({
-      headers: {
-        authorization: req.authorization
-      },
-      method: 'GET',
-      url: `/bedroom/${req.params.id}`
-    })
+    await bedroom.update(req.body)
+
     res.status(200)
     res.json({
-      data: afterUpdate.body.data,
+      data: bedroom,
       message: 'Berhasil meng-update bedroom'
     })
   } catch (err) {

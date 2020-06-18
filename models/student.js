@@ -36,11 +36,15 @@ module.exports = (sequelize, DataTypes) => {
       key:'id',
       foreignKey: 'studentId'
     })
-    Student.hasMany(models.Parent,{
+    Student.hasOne(models.Parent,{
       key:'id',
       foreignKey: 'studentId'
     })
-    Student.hasMany(models.StudentDocument,{
+    Student.hasOne(models.StudentDocument,{
+      key:'id',
+      foreignKey: 'studentId'
+    })
+    Student.hasOne(models.StudentDetail,{
       key:'id',
       foreignKey: 'studentId'
     })

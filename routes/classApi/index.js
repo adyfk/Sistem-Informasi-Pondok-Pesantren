@@ -51,24 +51,13 @@ router.get('/:id', auth, async (req, res) => {
 })
 router.put('/:id', auth, async (req, res) => {
   try {
-    const body = { ...req.body }
-    delete body.id
-    await models.Class.update(body, {
-      where: {
-        id: req.params.id
-      }
-    })
+    const classX = await models.Class.findByPk(req.params.id)
 
-    const afterUpdate = await req.uest({
-      headers: {
-        authorization: req.authorization
-      },
-      method: 'GET',
-      url: `/class/${req.params.id}`
-    })
+    await classX.update(req.body)
+
     res.status(200)
     res.json({
-      data: afterUpdate.body.data,
+      data: classX,
       message: 'Berhasil meng-update class'
     })
   } catch (err) {

@@ -1,4 +1,7 @@
 'use strict';
+
+const { uuid1 } = require("../utils/common");
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: {
@@ -6,11 +9,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50)
     },
     username: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(50),
       unique: true,
     },
-    password: DataTypes.STRING(50),
-    roleId: DataTypes.STRING(50)
+    password: {
+      type:DataTypes.STRING(50),
+      allowNull: true,
+    },
+    roleId: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    }
   }, {
     timestamps: false
   });

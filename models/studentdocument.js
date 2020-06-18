@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false
   });
+  StudentDocument.removeAttribute('id')
   StudentDocument.associate = function(models) {
     StudentDocument.belongsTo(models.Student,{
       foreignKey: 'studentId',

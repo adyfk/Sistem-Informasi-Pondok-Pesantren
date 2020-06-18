@@ -1,0 +1,2 @@
+GET http://localhost:9000/santri/ab0d9df0-b139-11ea-aefe-7ffaa388a98b HTTP/1.1
+content-type: application/json

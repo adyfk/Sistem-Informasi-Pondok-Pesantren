@@ -7,13 +7,15 @@ module.exports = {
         type: Sequelize.STRING(50),
       },
       username: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(50),
         unique: true
       },
       password: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       },
       roleId: {
+        allowNull: true,
         type: Sequelize.STRING(50),
         references: {
           model: "Roles",

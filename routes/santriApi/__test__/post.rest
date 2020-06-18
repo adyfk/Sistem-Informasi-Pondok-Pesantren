@@ -1,0 +1,16 @@
+POST http://localhost:9000/santri/ HTTP/1.1
+content-type: application/json
+
+ {
+    "name": "Test 2",
+    "dateOfBirth": "1998-09-10T17:00:00.000Z",
+    "gender": "P",
+    "address": "Archibald Viaduct",
+    "dorp": "beatae",
+    "district": "East",
+    "regency": "Ewaldmouth",
+    "province": "Berkshire",
+    "postCode": "57282",
+    "phoneNumber": "212.764.0893 x7511",
+    "email": "Colten80@gmail.com"
+}
