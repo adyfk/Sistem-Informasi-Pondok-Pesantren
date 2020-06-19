@@ -1,4 +1,7 @@
 'use strict';
+
+const sequelizePaginate  = require("sequelize-paginate");
+
 module.exports = (sequelize, DataTypes) => {
   const Student = sequelize.define('Student', {
     id: {
@@ -19,10 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       allowNull: true,
       type: DataTypes.STRING(45)
-    }
+    },
   }, {
     timestamps: false
   });
+  sequelizePaginate .paginate(Student)
   Student.associate = function(models) {
     Student.hasMany(models.Payment,{
       key:'id',

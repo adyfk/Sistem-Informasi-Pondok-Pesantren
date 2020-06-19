@@ -1,0 +1,6 @@
+# search by name and id
+PUT http://localhost:9000/student-bedroom/2/checkout HTTP/1.1
+content-type: application/json
+# search all
+# GET http://localhost:9000/santri HTTP/1.1
+# content-type: application/json

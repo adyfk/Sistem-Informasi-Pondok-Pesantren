@@ -9,8 +9,12 @@ const router = express.Router()
 
 router.get('/', auth, async (req, res) => {
   try {
-    const configs = { }
-    const { search } = req.query
+    const { page = 1, paginate = 25, search } = req.query
+    const configs = {
+      page,
+      paginate,
+      order: [['name', 'ASC']]
+    }
     if (search) {
       configs.where = {
         [Op.or]: {
@@ -20,7 +24,7 @@ router.get('/', auth, async (req, res) => {
         }
       }
     }
-    const students = await models.Student.findAll(configs)
+    const students = await models.Student.paginate(configs)
 
     if (!students) {
       throw new ReqException({ status: 404, message: 'Student tidak ditemukan' })

@@ -15,5 +15,5 @@ export default function (app) {
   app.use('/address', addressApi)
   app.use('/santri', santriApi)
   app.use('/document', documentApi)
-  app.use('/studentBedroom', studentBedroomApi)
+  app.use('/student-bedroom', studentBedroomApi)
 }
