@@ -4,6 +4,7 @@ import bedroomApi from './bedroomApi'
 import classApi from './classApi'
 import addressApi from './addressApi'
 import santriApi from './santriApi'
+import documentApi from './documentApi'
 
 export default function (app) {
   app.use('/user', userApi)
@@ -12,4 +13,5 @@ export default function (app) {
   app.use('/bedroom', bedroomApi)
   app.use('/address', addressApi)
   app.use('/santri', santriApi)
+  app.use('/document', documentApi)
 }

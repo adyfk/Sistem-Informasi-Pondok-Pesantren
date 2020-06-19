@@ -5,16 +5,19 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import uest from 'uest'
+import fileUpload from 'express-fileupload'
 
 dotenv.config()
 const app = express()
 
+app.use(fileUpload({
+  debug: true
+}))
 app.use(uest())
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
-
 routers(app)
 
 const port = process.env.PORT || 5000

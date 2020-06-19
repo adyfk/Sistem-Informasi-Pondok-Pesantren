@@ -5,7 +5,7 @@ import { ReqException, checkErrorRequest } from '../../utils/exception'
 import auth from '../../middleware/auth'
 
 const router = express.Router()
-
+// list student
 router.get('/', auth, async (req, res) => {
   try {
     const students = await models.Student.findAll()
@@ -30,7 +30,7 @@ router.get('/', auth, async (req, res) => {
       })
   }
 })
-
+// get detail student
 router.get('/:id', auth, async (req, res) => {
   try {
     const student = await models.Student.findByPk(req.params.id, {
@@ -97,19 +97,20 @@ router.post('/', auth, async (req, res) => {
       .status(200)
       .json({
         data: student,
-        message: 'Berhasil mengambil Student'
+        message: 'Berhasil membuat Student'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Gagal mengambil Student',
+        message: err.message || 'Gagal membuat Student',
         messageSystem: checkErrorRequest(err)
       })
   }
 })
 
+// untuk update student data
 router.put('/:id', auth, async (req, res) => {
   try {
     const student = await models.Student.findByPk(req.params.id)
@@ -129,6 +130,31 @@ router.put('/:id', auth, async (req, res) => {
       .json({
         data: {},
         message: err.message || 'Gagal mengambil Student',
+        messageSystem: checkErrorRequest(err)
+      })
+  }
+})
+
+// update data parent
+router.put('/:id/parent', auth, async (req, res) => {
+  try {
+    const parent = await models.Parent.findByPk(req.params.id)
+
+    if (!parent) { throw new ReqException({ status: 404, message: 'parent Not Found' }) }
+
+    await parent.update(req.body)
+    res
+      .status(200)
+      .json({
+        data: parent,
+        message: 'Berhasil mengambil parent'
+      })
+  } catch (err) {
+    res
+      .status(err.status || 500)
+      .json({
+        data: {},
+        message: err.message || 'Gagal mengambil parent',
         messageSystem: checkErrorRequest(err)
       })
   }
