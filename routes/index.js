@@ -5,6 +5,7 @@ import classApi from './classApi'
 import addressApi from './addressApi'
 import santriApi from './santriApi'
 import documentApi from './documentApi'
+import studentBedroomApi from './studentBedroomApi'
 
 export default function (app) {
   app.use('/user', userApi)
@@ -14,4 +15,5 @@ export default function (app) {
   app.use('/address', addressApi)
   app.use('/santri', santriApi)
   app.use('/document', documentApi)
+  app.use('/studentBedroom', studentBedroomApi)
 }
