@@ -6,16 +6,14 @@ import auth from '../../middleware/auth'
 import { Op } from 'sequelize'
 const router = express.Router()
 // list student
+
 router.get('/', auth, async (req, res) => {
   try {
     const configs = { }
-    const search = req.query.search
+    const { search } = req.query
     if (search) {
       configs.where = {
         [Op.or]: {
-          id: {
-            [Op.regexp]: search
-          },
           name: {
             [Op.regexp]: search
           }
@@ -25,7 +23,7 @@ router.get('/', auth, async (req, res) => {
     const students = await models.Student.findAll(configs)
 
     if (!students) {
-      throw new ReqException({ status: 404, message: 'Student tidak ditemukan' })()()
+      throw new ReqException({ status: 404, message: 'Student tidak ditemukan' })
     }
 
     res
@@ -45,13 +43,14 @@ router.get('/', auth, async (req, res) => {
   }
 })
 // get detail student
+
 router.get('/:id', auth, async (req, res) => {
   try {
     const student = await models.Student.findByPk(req.params.id, {
       include: [
         {
           model: models.User,
-          attributes: ['id', 'username', 'roleId']
+          attributes: { exclude: ['password'] }
         },
         'StudentDocument',
         'StudentDetail'
@@ -59,7 +58,7 @@ router.get('/:id', auth, async (req, res) => {
     })
 
     if (!student) {
-      throw new ReqException({ status: 404, message: 'Student tidak ditemukan' })()()
+      throw new ReqException({ status: 404, message: 'Student tidak ditemukan' })
     }
 
     res
@@ -82,14 +81,9 @@ router.get('/:id', auth, async (req, res) => {
 router.post('/', auth, async (req, res) => {
   try {
     const username = req.body.name.replace(/ /g, '') + new Date().getTime()
-    const { body: { data: generation } } = await req.uest({
-      url: '/generation/latest',
-      method: 'GET',
-      headers: {
-        Authorization: req.headers.authorization
-      }
+    const generation = await models.Generation.findOne({
+      order: [['createdAt', 'DESC']]
     })
-
     const user = await models.User.create({
       id: uuid1(),
       username: username
