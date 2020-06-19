@@ -25,7 +25,7 @@ router.post('/upload', auth, async (req, res) => {
 
     const fileName = `${type + '-' + name.replace(/ /g, '') + '-' + new Date().getTime()}.pdf`
 
-    file.mv(`./private/document/${fileName}`, function (err) {
+    file.mv(`./private/files/${fileName}`, function (err) {
       if (err) {
         console.log(err)
         throw new ReqException({ status: 500 })
@@ -55,7 +55,7 @@ router.get('/:fileName', auth, async (req, res) => {
     console.log('woi read herer =', splitName)
     const customFileName = (splitName[1] + ' ' + splitName[0] + ' ' + splitName[2] + ' ' + splitName[3]).caplitalize()
     console.log('woi read herer =', customFileName)
-    const locationFile = `./private/document/${req.params.fileName}`
+    const locationFile = `./private/files/${req.params.fileName}`
     res
       .download(locationFile, customFileName)
   } catch (err) {
