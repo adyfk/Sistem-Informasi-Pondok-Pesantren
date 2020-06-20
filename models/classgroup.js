@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Class = sequelize.define('ClassGroup', {
+  const ClassGroup = sequelize.define('ClassGroup', {
     id: {
       primaryKey : true,
       type: DataTypes.STRING(50)
@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false
   });
-  Class.associate = function(models) {
-    Class.hasMany(models.StudentClass,{
+  ClassGroup.associate = function(models) {
+    ClassGroup.hasMany(models.StudentClass,{
       key:'id',
       foreignKey: 'classGroupId'
     })

@@ -76,7 +76,7 @@ router.get('/district', auth, async (req, res) => {
       }
       const result = JSON.parse(body)
       res.json({
-        data: result
+        data: result.kecamatan
       })
     })
   } catch (err) {
