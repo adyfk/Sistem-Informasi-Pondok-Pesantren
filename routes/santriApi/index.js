@@ -104,6 +104,9 @@ router.post('/', auth, async (req, res) => {
       studentId: student.id,
       generationId: generation.id
     })
+    await models.Parent.create({
+      studentId: student.id
+    })
 
     res
       .status(200)

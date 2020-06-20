@@ -5,11 +5,26 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       type: DataTypes.STRING(50)
     },
-    fcKK: DataTypes.STRING(50),
-    fcKTP: DataTypes.STRING(50),
-    fcAkte: DataTypes.STRING(50),
-    photo: DataTypes.STRING(50),
-    fcNpwp: DataTypes.STRING(50)
+    fcKK: {
+      allowNull: true,
+      type: DataTypes.STRING(50)
+    },
+    fcKTP: {
+      allowNull: true,
+      type: DataTypes.STRING(50)
+    },
+    fcAkte: {
+      allowNull: true,
+      type: DataTypes.STRING(50)
+    },
+    photo: {
+      allowNull: true,
+      type: DataTypes.STRING(50)
+    },
+    fcNpwp: {
+      allowNull: true,
+      type: DataTypes.STRING(50)
+    },
   }, {
     timestamps: false,
   });

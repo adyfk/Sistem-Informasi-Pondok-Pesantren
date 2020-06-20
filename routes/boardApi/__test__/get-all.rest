@@ -1,0 +1,6 @@
+# search by name and id
+GET http://localhost:9000/board?localhost:9000/board?search=ar HTTP/1.1
+content-type: application/json
+# search all
+# GET http://localhost:9000/board HTTP/1.1
+# content-type: application/json

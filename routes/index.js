@@ -7,6 +7,7 @@ import santriApi from './santriApi'
 import documentApi from './documentApi'
 import studentBedroomApi from './studentBedroomApi'
 import studentClassApi from './studentClassApi'
+import boardApi from './boardApi'
 
 export default function (app) {
   app.use('/user', userApi)
@@ -18,4 +19,5 @@ export default function (app) {
   app.use('/document', documentApi)
   app.use('/student-bedroom', studentBedroomApi)
   app.use('/student-class', studentClassApi)
+  app.use('/board', boardApi)
 }

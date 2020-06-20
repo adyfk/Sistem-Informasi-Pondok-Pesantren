@@ -9,20 +9,50 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       type: DataTypes.STRING(50)
     },
-    name: DataTypes.STRING(50),
-    dateOfBirth: DataTypes.DATE,
-    address: DataTypes.STRING(35),
-    dorp: DataTypes.STRING(25),
-    district: DataTypes.STRING(25),
-    regency: DataTypes.STRING(25),
-    province: DataTypes.STRING(25),
-    postCode: DataTypes.STRING(6),
-    phoneNumber: DataTypes.STRING(25),
+    name: {
+      allowNull: true,
+      type: DataTypes.STRING(50)
+    },
+    dateOfBirth: {
+      allowNull: true,
+      type: DataTypes.DATE
+    },
+    address: {
+      allowNull: true,
+      type: DataTypes.STRING(35)
+    },
+    dorp: {
+      allowNull: true,
+      type: DataTypes.STRING(25)
+    },
+    district: {
+      allowNull: true,
+      type: DataTypes.STRING(25)
+    },
+    regency: {
+      allowNull: true,
+      type: DataTypes.STRING(25)
+    },
+    province: {
+      allowNull: true,
+      type: DataTypes.STRING(25)
+    },
+    postCode: {
+      allowNull: true,
+      type: DataTypes.STRING(6)
+    },
+    phoneNumber: {
+      allowNull: true,
+      type: DataTypes.STRING(25)
+    },
     email: {
       allowNull: true,
       type: DataTypes.STRING(45)
     },
-    fcKTP: DataTypes.STRING(50)
+    fcKTP: {
+      allowNull: true,
+      type: DataTypes.STRING(50)
+    }
   }, {
     timestamps: false
   });

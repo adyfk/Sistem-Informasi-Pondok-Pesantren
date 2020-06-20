@@ -11,18 +11,23 @@ module.exports = {
         unique: true
       },
       fcKK: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       },
       fcKTP: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       },
       fcAkte: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       },
       photo: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       },
       fcNpwp: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       }
     });

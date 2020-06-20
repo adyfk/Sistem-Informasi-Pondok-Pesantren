@@ -15,30 +15,39 @@ module.exports = {
         unique: true
       },
       name: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       },
       dateOfBirth: {
+        allowNull: true,
         type: Sequelize.DATE
       },
       address: {
+        allowNull: true,
         type: Sequelize.STRING(35)
       },
       dorp: {
+        allowNull: true,
         type: Sequelize.STRING(25)
       },
       district: {
+        allowNull: true,
         type: Sequelize.STRING(25)
       },
       regency: {
+        allowNull: true,
         type: Sequelize.STRING(25)
       },
       province: {
+        allowNull: true,
         type: Sequelize.STRING(25)
       },
       postCode: {
+        allowNull: true,
         type: Sequelize.STRING(6)
       },
       phoneNumber: {
+        allowNull: true,
         type: Sequelize.STRING(25)
       },
       email: {
@@ -46,6 +55,7 @@ module.exports = {
         type: Sequelize.STRING(45)
       },
       fcKTP: {
+        allowNull: true,
         type: Sequelize.STRING(50)
       }
     });
