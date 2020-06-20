@@ -1,20 +1,20 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Class = sequelize.define('Class', {
+  const Class = sequelize.define('ClassGroup', {
     id: {
       primaryKey : true,
       type: DataTypes.STRING(50)
     },
-    title: DataTypes.STRING(20),
-    cost: DataTypes.INTEGER()
+    classId: DataTypes.STRING(50),
+    gender: DataTypes.STRING(2)
   }, {
     timestamps: false
   });
   Class.associate = function(models) {
-    Class.hasMany(models.ClassGroup,{
+    Class.hasMany(models.StudentClass,{
       key:'id',
       foreignKey: 'classId'
     })
   };
-  return Class;
+  return ClassGroup;
 };

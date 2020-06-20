@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50)
     },
     studentId: DataTypes.STRING(50),
-    classId: DataTypes.STRING(50),
+    classGroupId: DataTypes.STRING(50),
     studentIn: {
       allowNull:true,
       type: DataTypes.DATE
@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'studentId',
       sourceKey: 'id'
     })
-    StudentClass.belongsTo(models.Class,{
-      foreignKey: 'classId',
+    StudentClass.belongsTo(models.ClassGroup,{
+      foreignKey: 'classGroupId',
       sourceKey: 'id'
     })
   };

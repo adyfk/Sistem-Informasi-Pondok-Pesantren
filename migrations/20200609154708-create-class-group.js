@@ -1,20 +1,20 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Classes', {
+    return queryInterface.createTable('ClassGroups', {
       id:  {
         primaryKey: true,
         type: Sequelize.STRING(50),
       },
-      title: {
-        type: Sequelize.STRING(20)
+      classId: {
+        type: Sequelize.STRING(50)
       },
-      cost:{
-        type: Sequelize.INTEGER()
+      gender:{
+        type: Sequelize.STRING(2)
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Classes');
+    return queryInterface.dropTable('ClassGroups');
   }
 };
