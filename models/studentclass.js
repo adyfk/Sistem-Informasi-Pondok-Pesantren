@@ -7,10 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     studentId: DataTypes.STRING(50),
     classGroupId: DataTypes.STRING(50),
-    studentIn: {
-      allowNull:true,
-      type: DataTypes.DATE
-    },
+    studentIn: DataTypes.DATE,
     studentOut: {
       allowNull:true,
       type: DataTypes.DATE

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   Class.associate = function(models) {
     Class.hasMany(models.StudentClass,{
       key:'id',
-      foreignKey: 'classId'
+      foreignKey: 'classGroupId'
     })
   };
   return ClassGroup;

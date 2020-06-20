@@ -16,12 +16,11 @@ module.exports = {
       classGroupId: {
         type: Sequelize.STRING(50),
         references: {
-          model: "Classes",
+          model: "ClassGroups",
           key: "id",
         },
       },
       studentIn: {
-        allowNull:true,
         type: Sequelize.DATE
       },
       studentOut: {
