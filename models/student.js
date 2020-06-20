@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       allowNull: true,
       type: DataTypes.STRING(45)
-    },
+    }
   }, {
-    timestamps: false
+    updatedAt: false
   });
-  sequelizePaginate .paginate(Student)
+  sequelizePaginate.paginate(Student)
   Student.associate = function(models) {
     Student.hasMany(models.Payment,{
       key:'id',

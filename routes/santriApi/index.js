@@ -1,5 +1,6 @@
 import express from 'express'
 import models from '../../models'
+import { generateNis } from './helper'
 import { uuid1 } from '../../utils/common'
 import { ReqException, checkErrorRequest } from '../../utils/exception'
 import auth from '../../middleware/auth'
@@ -88,12 +89,20 @@ router.post('/', auth, async (req, res) => {
     const generation = await models.Generation.findOne({
       order: [['createdAt', 'DESC']]
     })
+
+    const usetLatest = await models.Student.findOne({
+      order: [['createdAt', 'DESC']]
+    })
+    const [, year, no] = usetLatest.id.split('.')
+
+    const studentId = generateNis({ year, no })
+
     const user = await models.User.create({
       id: uuid1(),
       username: username
     })
     const student = await models.Student.create({
-      id: uuid1(),
+      id: studentId,
       userId: user.id,
       ...req.body
     })

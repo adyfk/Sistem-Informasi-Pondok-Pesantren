@@ -46,7 +46,12 @@ module.exports = {
       email: {
         allowNull: true,
         type: Sequelize.STRING(45)
-      }
+      },
+      createdAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

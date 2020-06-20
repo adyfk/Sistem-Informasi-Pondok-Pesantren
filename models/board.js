@@ -1,4 +1,6 @@
 'use strict';
+const sequelizePaginate  = require("sequelize-paginate");
+
 module.exports = (sequelize, DataTypes) => {
   const Board = sequelize.define('Board', {
     id: {
@@ -23,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false
   });
+  sequelizePaginate.paginate(Board)
   Board.associate = function(models) {
     Board.hasOne(models.BoardDocument,{
       key:'id',
