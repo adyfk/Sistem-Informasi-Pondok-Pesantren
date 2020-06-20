@@ -111,7 +111,8 @@ router.post('/', auth, async (req, res) => {
     })
     await models.StudentDetail.create({
       studentId: student.id,
-      generationId: generation.id
+      generationId: generation.id,
+      status: true
     })
     await models.Parent.create({
       studentId: student.id

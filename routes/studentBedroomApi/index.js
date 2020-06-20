@@ -9,30 +9,35 @@ const router = express.Router()
 
 router.get('/student', async (req, res) => {
   try {
-    const { name = '', gender = 'P' } = req.query
+    const { id = '', bedroomId = '' } = req.query
     const condition = {}
 
-    if (name) {
-      condition.name = {
-        [Op.regexp]: name
+    if (id) {
+      condition.id = {
+        [Op.regexp]: id
       }
     }
+
+    const bedroom = await models.Bedroom.findByPk(bedroomId)
+
     const student = await models.Student.findAll({
       where: {
         [Op.or]: [
           Sequelize.literal('`StudentBedrooms`.`studentId` IS NULL'),
           Sequelize.literal('`StudentBedrooms`.`studentOut` IS NOT NULL')
         ],
-        [Op.and]: {
-          gender
-        },
+        [Op.and]: [
+          Sequelize.literal('`StudentDetail`.`status`=1')
+        ],
+        gender: bedroom.gender,
         ...condition
       },
       include: [
         {
           model: models.StudentBedroom,
           required: false
-        }
+        },
+        'StudentDetail'
       ]
     })
 
