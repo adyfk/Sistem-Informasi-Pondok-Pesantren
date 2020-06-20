@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50)
     },
     generationId: DataTypes.STRING(50),
+    status: DataTypes.BOOLEAN()
   }, {
     timestamps: false
   });

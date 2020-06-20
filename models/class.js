@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Class.associate = function(models) {
-    Class.hasMany(models.ClassGroup,{
+    Class.hasMany(models.StudentClass,{
       key:'id',
       foreignKey: 'classId'
     })

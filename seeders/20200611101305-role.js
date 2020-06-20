@@ -1,10 +1,10 @@
 'use strict'
 const faker = require('faker')
-const roleId = ['1', '2', '3']
+const roleId = ['1', '2', '3', '4']
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const fakeData = Array.from({ length: 3 }).map((data, index) => {
+    const fakeData = Array.from({ length: 4 }).map((data, index) => {
       return {
         id: roleId[index],
         title: faker.name.firstName(),

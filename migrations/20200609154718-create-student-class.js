@@ -13,10 +13,10 @@ module.exports = {
           key: "id",
         },
       },
-      classGroupId: {
+      classId: {
         type: Sequelize.STRING(50),
         references: {
-          model: "ClassGroups",
+          model: "Classes",
           key: "id",
         },
       },

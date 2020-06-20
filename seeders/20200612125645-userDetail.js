@@ -16,7 +16,15 @@ module.exports = {
         latestLogin: new Date(2020, 6, 11)
       },
       {
-        userId: '003',
+        userId: '004',
+        latestLogin: new Date(2020, 6, 12)
+      },
+      {
+        userId: '005',
+        latestLogin: new Date(2020, 6, 12)
+      },
+      {
+        userId: '006',
         latestLogin: new Date(2020, 6, 12)
       }
     ]

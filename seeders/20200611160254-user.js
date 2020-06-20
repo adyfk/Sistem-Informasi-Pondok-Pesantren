@@ -41,6 +41,12 @@ module.exports = {
         username: faker.internet.userName(),
         password: '123456',
         roleId: '1'
+      },
+      {
+        id: '006',
+        username: faker.internet.userName(),
+        password: '123456',
+        roleId: '4'
       }
     ]
     return queryInterface.bulkInsert('Users', fakeData, {})

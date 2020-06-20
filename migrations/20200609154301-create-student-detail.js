@@ -16,7 +16,8 @@ module.exports = {
           model: "Generations",
           key: "id",
         },
-      }
+      },
+      status: Sequelize.BOOLEAN()
     });
   },
   down: (queryInterface, Sequelize) => {

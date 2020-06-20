@@ -48,6 +48,21 @@ module.exports = {
         postCode: '57522',
         phoneNumber: faker.phone.phoneNumber(),
         email: faker.internet.email()
+      },
+      {
+        id: 'S4',
+        userId: '006',
+        name: faker.internet.userName(),
+        dateOfBirth: new Date(1998, 12, 11),
+        gender: 'L',
+        address: faker.address.streetName(),
+        dorp: faker.lorem.word(),
+        district: faker.address.cityPrefix(),
+        regency: faker.address.city(),
+        province: faker.address.county(),
+        postCode: '57522',
+        phoneNumber: faker.phone.phoneNumber(),
+        email: faker.internet.email()
       }
     ]
     return queryInterface.bulkInsert('Students', fakeData, {})

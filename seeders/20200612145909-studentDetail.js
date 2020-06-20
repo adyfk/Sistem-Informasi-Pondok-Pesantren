@@ -5,15 +5,23 @@ module.exports = {
     const data = [
       {
         studentId: 'S1',
-        generationId: 'G1'
+        generationId: 'G1',
+        status: true
       },
       {
         studentId: 'S2',
-        generationId: 'G1'
+        generationId: 'G1',
+        status: true
       },
       {
         studentId: 'S3',
-        generationId: 'G2'
+        generationId: 'G2',
+        status: true
+      },
+      {
+        studentId: 'S4',
+        generationId: 'G1',
+        status: false
       }
     ]
     return queryInterface.bulkInsert('StudentDetails', data, {})

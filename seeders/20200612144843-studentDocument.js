@@ -21,6 +21,12 @@ module.exports = {
         fcKK: faker.lorem.word(),
         fcKTP: faker.lorem.word(),
         fcAkte: faker.lorem.word()
+      },
+      {
+        studentId: 'S4',
+        fcKK: faker.lorem.word(),
+        fcKTP: faker.lorem.word(),
+        fcAkte: faker.lorem.word()
       }
     ]
     return queryInterface.bulkInsert('StudentDocuments', fakeData, {})
