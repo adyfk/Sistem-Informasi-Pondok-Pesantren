@@ -1,5 +1,5 @@
 import express from 'express'
-import models from '../../models'
+import models, { sequelize } from '../../models'
 import { uuid1 } from '../../utils/common'
 import auth from '../../middleware/auth'
 import { checkErrorRequest, ReqException } from '../../utils/exception'
@@ -19,10 +19,18 @@ router.get('/student', async (req, res) => {
         {
           model: models.Payment,
           required: false,
-          include: [{
-            model: models.PaymentDetail,
-            required: false
-          }]
+          attributes: {
+            include: [
+              [
+                sequelize.literal(`(
+                  SELECT SUM(paid)
+                  FROM paymentdetails
+                  WHERE
+                    paymentId = \`Payments.id\`
+              )`, 'int'),
+                'paid']
+            ]
+          }
         }
       ]
     })
