@@ -8,6 +8,7 @@ import documentApi from './documentApi'
 import studentBedroomApi from './studentBedroomApi'
 import studentClassApi from './studentClassApi'
 import boardApi from './boardApi'
+import paymantApi from './paymentApi'
 
 export default function (app) {
   app.use('/user', userApi)
@@ -20,4 +21,5 @@ export default function (app) {
   app.use('/student-bedroom', studentBedroomApi)
   app.use('/student-class', studentClassApi)
   app.use('/board', boardApi)
+  app.use('/payment', paymantApi)
 }
