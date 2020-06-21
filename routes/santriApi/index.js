@@ -1,5 +1,5 @@
 import express from 'express'
-import models from '../../models'
+import models, { sequelize } from '../../models'
 import { generateNis } from './helper'
 import { uuid1 } from '../../utils/common'
 import { ReqException, checkErrorRequest } from '../../utils/exception'
@@ -84,40 +84,64 @@ router.get('/:id', auth, async (req, res) => {
 })
 
 router.post('/', auth, async (req, res) => {
+  const t = await sequelize.transaction()
   try {
     const username = req.body.name.replace(/ /g, '') + new Date().getTime()
     const generation = await models.Generation.findOne({
       order: [['createdAt', 'DESC']]
     })
-
+    const tagihan = await models.GenerationDetail.sum('cost', {
+      where: {
+        generationId: generation.id
+      }
+    })
     const usetLatest = await models.Student.findOne({
       order: [['createdAt', 'DESC']]
     })
     const [, year, no] = usetLatest.id.split('.')
 
     const studentId = generateNis({ year, no })
-
     const user = await models.User.create({
       id: uuid1(),
       username: username
+    }, {
+      transaction: t
     })
     const student = await models.Student.create({
       id: studentId,
       userId: user.id,
       ...req.body
+    }, {
+      transaction: t
     })
     await models.StudentDocument.create({
       studentId: student.id
+    }, {
+      transaction: t
     })
     await models.StudentDetail.create({
       studentId: student.id,
       generationId: generation.id,
       status: true
+    }, {
+      transaction: t
     })
     await models.Parent.create({
+      id: uuid1(),
       studentId: student.id
+    }, {
+      transaction: t
     })
-
+    await models.Payment.create({
+      id: uuid1(),
+      studentId: student.id,
+      paymentTypeId: 'PT1',
+      description: 'uang-gedung',
+      bill: tagihan
+    }, {
+      transaction: t
+    })
+    await t.commit()
     res
       .status(200)
       .json({
@@ -132,6 +156,7 @@ router.post('/', auth, async (req, res) => {
         message: err.message || 'Gagal membuat Student',
         messageSystem: checkErrorRequest(err)
       })
+    await t.rollback()
   }
 })
 

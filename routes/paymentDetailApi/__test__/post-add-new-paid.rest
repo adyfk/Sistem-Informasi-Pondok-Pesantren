@@ -1,0 +1,8 @@
+POST http://localhost:9000/payment-detail HTTP/1.1
+content-type: application/json
+
+{
+    "paymentId":"7c981d00-b3ce-11ea-ad0a-a3921f63616e",
+    "paid":500000
+}
+
