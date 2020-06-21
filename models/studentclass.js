@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'studentId',
       sourceKey: 'id'
     })
-    StudentClass.belongsTo(models.StudentClass,{
+    StudentClass.belongsTo(models.Class,{
       foreignKey: 'classId',
       sourceKey: 'id'
     })

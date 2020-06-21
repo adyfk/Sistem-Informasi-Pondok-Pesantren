@@ -1,9 +1,9 @@
 import express from 'express'
 import models, { sequelize } from '../../models'
-import { uuid1 } from '../../utils/common'
 import auth from '../../middleware/auth'
-import { checkErrorRequest, ReqException } from '../../utils/exception'
-import { Op, Sequelize } from 'sequelize'
+import { uuid1 } from '../../utils/common'
+import { Sequelize, Op } from 'sequelize'
+import { ReqException } from '../../utils/exception'
 
 const router = express.Router()
 
@@ -45,115 +45,59 @@ router.get('/student', async (req, res) => {
   }
 })
 
-router.post('/', auth, async (req, res) => {
+router.post('/generate', auth, async (req, res) => {
   try {
-    const studentBedroom = await models.StudentBedroom.create({
-      id: uuid1(),
-      studentIn: new Date(),
-      ...req.body
+    const paymentLatest = await models.Payment.findOne({
+      attributes: ['createdAt'],
+      where: {
+        paymentTypeId: 'PT2'
+      },
+      order: [['createdAt', 'DESC']]
     })
-    if (!studentBedroom) { throw new ReqException({ status: 400 }) }
-    res
-      .status(200)
-      .json({
-        data: studentBedroom,
-        message: 'Berhasil menambah santri!'
-      })
-  } catch (error) {
-    res
-      .status(error?.status || 500)
-      .json({
-        data: {},
-        message: error?.message || 'Gagal menambah santri!',
-        messageSystem: checkErrorRequest(error)
-      })
-  }
-})
-router.get('/:id/student', async (req, res) => {
-  try {
-    const { name = '' } = req.query
-    const condition = {}
 
-    if (name) {
-      condition.name = {
-        [Op.regexp]: name
-      }
+    if (new Date(paymentLatest.createdAt).getMonth() === new Date().getMonth()) {
+      throw new ReqException({ status: 404, message: 'Bulan Ini telah ter-generate.' })
     }
-    const student = await models.Student.findAll({
+
+    const students = await models.Student.findAll({
       where: {
         [Op.and]: [
-          Sequelize.literal('`StudentBedrooms`.`studentOut` IS NULL'),
-          Sequelize.literal("`StudentBedrooms`.`bedroomId` ='" + req.params.id + "'")
-        ],
-        ...condition
+          Sequelize.literal('`StudentClasses`.`studentId` IS NOT NULL'),
+          Sequelize.literal('`StudentClasses`.`studentOut` IS NULL'),
+          Sequelize.literal('`StudentDetail`.`status`=1')
+        ]
       },
       include: [
         {
-          model: models.StudentBedroom,
-          required: false
-        }
+          model: models.StudentClass,
+          required: false,
+          include: [{
+            model: models.Class
+          }]
+        },
+        'StudentDetail'
       ]
     })
 
+    const payments = students.map((student) => ({
+      id: uuid1(),
+      paymentTypeId: 'PT2',
+      studentId: student.id,
+      bill: student.StudentClasses[0].Class.cost,
+      description: `SPP ${new Date().toLocaleDateString().slice(2)} - ${student.StudentClasses[0].Class.title}`
+    }))
+    await models.Payment.bulkCreate(payments)
+
     res.json({
-      data: student
+      data: {
+        total: payments.length
+      },
+      message: `${payments.length} Santri di berhasil di generate`
     })
   } catch (error) {
     res.json({
       error
     })
-  }
-})
-
-router.post('/', auth, async (req, res) => {
-  try {
-    const studentBedroom = await models.StudentBedroom.create({
-      id: uuid1(),
-      studentIn: new Date(),
-      ...req.body
-    })
-    if (!studentBedroom) { throw new ReqException({ status: 400 }) }
-    res
-      .status(200)
-      .json({
-        data: studentBedroom,
-        message: 'Berhasil menambah santri!'
-      })
-  } catch (error) {
-    res
-      .status(error?.status || 500)
-      .json({
-        data: {},
-        message: error?.message || 'Gagal menambah santri!',
-        messageSystem: checkErrorRequest(error)
-      })
-  }
-})
-
-router.put('/:id/checkout', auth, async (req, res) => {
-  try {
-    const studentBedroom = await models.StudentBedroom.findByPk(req.params.id)
-
-    if (!studentBedroom) { throw new ReqException({ status: 404, message: 'Santri Not Found' }) }
-
-    await studentBedroom.update({
-      studentOut: new Date()
-    })
-
-    res
-      .status(200)
-      .json({
-        data: studentBedroom,
-        message: 'Berhasil check out santri!'
-      })
-  } catch (error) {
-    res
-      .status(error.status || 500)
-      .json({
-        data: {},
-        message: error.message || 'Gagal checkout santri!',
-        messageSystem: checkErrorRequest(error)
-      })
   }
 })
 
