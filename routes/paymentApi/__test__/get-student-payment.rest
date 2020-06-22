@@ -1,2 +1,2 @@
-GET http://localhost:9000/payment/student?id=RQ.2020.003 HTTP/1.1
+GET http://localhost:9000/payment/student?id=RQ.2020.004 HTTP/1.1
 content-type: application/json

@@ -3,6 +3,7 @@ import models from '../../models'
 import { uuid1 } from '../../utils/common'
 import auth from '../../middleware/auth'
 import { checkErrorRequest, ReqException } from '../../utils/exception'
+import { Sequelize, Op } from 'sequelize'
 // import { Sequelize, Op } from 'sequelize'
 // import { Op, Sequelize } from 'sequelize'
 
@@ -32,7 +33,7 @@ router.get('/student', async (req, res) => {
       })
     }
 
-    if (!student.StudentClass.length < 1) {
+    if (!student.StudentClass?.length < 1) {
       if (!student.StudentClass[0].studentOut) {
         const classUsed = student.StudentClass[0].Class.title
         throw new ReqException({
@@ -103,6 +104,42 @@ router.put('/:id/checkout', auth, async (req, res) => {
         message: error.message || 'Gagal checkout santri!',
         messageSystem: checkErrorRequest(error)
       })
+  }
+})
+
+router.get('/:id/student', async (req, res) => {
+  try {
+    const { name = '' } = req.query
+    const condition = {}
+
+    if (name) {
+      condition.name = {
+        [Op.regexp]: name
+      }
+    }
+    const student = await models.Student.findAll({
+      where: {
+        [Op.and]: [
+          Sequelize.literal('`StudentClasses`.`studentOut` IS NULL'),
+          Sequelize.literal("`StudentClasses`.`classId` ='" + req.params.id + "'")
+        ],
+        ...condition
+      },
+      include: [
+        {
+          model: models.StudentClass,
+          required: false
+        }
+      ]
+    })
+
+    res.json({
+      data: student
+    })
+  } catch (error) {
+    res.json({
+      error
+    })
   }
 })
 
