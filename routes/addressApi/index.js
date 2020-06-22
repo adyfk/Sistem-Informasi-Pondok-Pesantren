@@ -72,7 +72,7 @@ router.get('/district', auth, async (req, res) => {
     }
     request(configs, (error, response, body) => {
       if (error) {
-        throw ReqException({ status: 404, data: [], message: 'Kecamatan tidak ditemukan' })
+        throw ReqException({ status: 404, data: [], message: 'Kecamatan tidak ditemukan!' })
       }
       const result = JSON.parse(body)
       res.json({
@@ -83,7 +83,7 @@ router.get('/district', auth, async (req, res) => {
     res.status(err.status || 500)
     res.json({
       data: [],
-      message: err.message || 'Gagal mengambil kecamatan',
+      message: err.message || 'Gagal mengambil kecamatan!',
       messageSystem: checkErrorRequest(err)
     })
   }

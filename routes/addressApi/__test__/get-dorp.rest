@@ -1,2 +1,0 @@
-GET http://localhost:9000/address/dorp?provinceId=11 HTTP/1.1
-content-type: application/json
