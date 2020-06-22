@@ -10,43 +10,53 @@ const router = express.Router()
 router.get('/student', async (req, res) => {
   try {
     const { id = '', bedroomId = '' } = req.query
-    const condition = {}
-
-    if (id) {
-      condition.id = {
-        [Op.regexp]: id
-      }
-    }
 
     const bedroom = await models.Bedroom.findByPk(bedroomId)
 
-    const student = await models.Student.findAll({
-      where: {
-        [Op.or]: [
-          Sequelize.literal('`StudentBedrooms`.`studentId` IS NULL'),
-          Sequelize.literal('`StudentBedrooms`.`studentOut` IS NOT NULL')
-        ],
-        [Op.and]: [
-          Sequelize.literal('`StudentDetail`.`status`=1')
-        ],
-        gender: bedroom.gender,
-        ...condition
-      },
+    const student = await models.Student.findByPk(id, {
       include: [
         {
           model: models.StudentBedroom,
-          required: false
+          required: false,
+          limit: 1,
+          include: ['Bedroom'],
+          order: [['studentIn', 'DESC']]
         },
         'StudentDetail'
       ]
     })
 
+    if (!student.StudentDetail.status) {
+      throw new ReqException({
+        status: 404,
+        message: 'Santri telah tidak aktif'
+      })
+    }
+
+    if (student.StudentBedrooms[0].studentOut) {
+      const bedroomUsed = student.StudentBedrooms[0].Bedroom.title
+      throw new ReqException({
+        status: 404,
+        message: `Santri masih menggunakan kamar ${bedroomUsed}`
+      })
+    }
+
+    if (student.gender !== bedroom.gender) {
+      throw new ReqException({
+        status: 404,
+        message: `Kamar kusus ${bedroom.gender === 'P' ? 'Perempuan' : 'Laki-laki'}`
+      })
+    }
+
     res.json({
       data: student
     })
   } catch (error) {
-    res.json({
-      error
+    res.status(
+     error?.status || 500
+    ).json({
+      status: error?.status || 500,
+      message: error.message || 'Gagal ambil santri'
     })
   }
 })
