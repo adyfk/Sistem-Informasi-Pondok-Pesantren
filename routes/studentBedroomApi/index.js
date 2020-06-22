@@ -33,12 +33,14 @@ router.get('/student', async (req, res) => {
       })
     }
 
-    if (!student.StudentBedrooms[0].studentOut) {
-      const bedroomUsed = student.StudentBedrooms[0].Bedroom.title
-      throw new ReqException({
-        status: 404,
-        message: `Santri masih menggunakan kamar ${bedroomUsed}`
-      })
+    if (!student.StudentBedrooms.length < 1) {
+      if (!student.StudentBedrooms[0].studentOut) {
+        const bedroomUsed = student.StudentBedrooms[0].Bedroom.title
+        throw new ReqException({
+          status: 404,
+          message: `Santri masih menggunakan kamar ${bedroomUsed}`
+        })
+      }
     }
 
     if (student.gender !== bedroom.gender) {

@@ -32,12 +32,14 @@ router.get('/student', async (req, res) => {
       })
     }
 
-    if (!student.StudentClasses[0].studentOut) {
-      const classUsed = student.StudentClasses[0].Class.title
-      throw new ReqException({
-        status: 404,
-        message: `Santri masih menggunakan kelas ${classUsed}`
-      })
+    if (!student.StudentClass.length < 1) {
+      if (!student.StudentClass[0].studentOut) {
+        const classUsed = student.StudentClass[0].Class.title
+        throw new ReqException({
+          status: 404,
+          message: `Santri masih menggunakan kelas ${classUsed}`
+        })
+      }
     }
 
     res.json({
