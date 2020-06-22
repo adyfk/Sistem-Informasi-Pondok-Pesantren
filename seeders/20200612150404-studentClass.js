@@ -5,35 +5,35 @@ module.exports = {
     const data = [
       {
         id: '1',
-        studentId: 'S1',
+        studentId: 'RQ.2017.001',
         classId: 'C1',
-        studentIn: new Date(2019, 7, 15),
-        studentOut: new Date(2019, 12, 20)
+        studentIn: new Date(2017, 7, 15),
+        studentOut: new Date(2017, 12, 20)
       },
       {
         id: '2',
-        studentId: 'S2',
+        studentId: 'RQ.2017.002',
         classId: 'C1',
-        studentIn: new Date(2019, 7, 15)
+        studentIn: new Date(2017, 7, 15)
       },
       {
         id: '3',
-        studentId: 'S1',
+        studentId: 'RQ.2017.001',
         classId: 'C2',
-        studentIn: new Date(2020, 1, 10)
+        studentIn: new Date(2018, 1, 10)
       },
       {
         id: '4',
-        studentId: 'S3',
+        studentId: 'RQ.2018.001',
         classId: 'C1',
-        studentIn: new Date(2020, 7, 15)
+        studentIn: new Date(2018, 7, 15)
       },
       {
         id: '5',
-        studentId: 'S4',
+        studentId: 'RQ.2019.001',
         classId: 'C1',
-        studentIn: new Date(2020, 7, 15),
-        studentOut: new Date(2020, 10, 10)
+        studentIn: new Date(2019, 7, 15),
+        studentOut: new Date(2019, 10, 10)
       }
     ]
     return queryInterface.bulkInsert('StudentClasses', data, {})

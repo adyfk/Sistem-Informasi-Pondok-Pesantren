@@ -5,17 +5,17 @@ module.exports = {
     const data = [
       {
         id: 'PY1',
-        studentId: 'S1',
+        studentId: 'RQ.2017.001',
         paymentTypeId: 'PT1',
         description: '',
-        bill: 9000000
+        bill: 780000
       },
       {
         id: 'PY2',
-        studentId: 'S1',
+        studentId: 'RQ.2017.001',
         paymentTypeId: 'PT2',
         description: '',
-        bill: 8000000
+        bill: 325000
       }
     ]
     return queryInterface.bulkInsert('Payments', data, {})

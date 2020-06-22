@@ -44,6 +44,27 @@ module.exports = {
         title: 'Seragam',
         description: 'Seragam angkatan II',
         cost: 265000
+      },
+      {
+        id: '7',
+        generationId: 'G3',
+        title: 'Pendaftaran',
+        description: 'Pendaftaran angkatan III',
+        cost: 30000
+      },
+      {
+        id: '8',
+        generationId: 'G3',
+        title: 'Bangunan',
+        description: 'Bangunan angkatan III',
+        cost: 550000
+      },
+      {
+        id: '9',
+        generationId: 'G3',
+        title: 'Seragam',
+        description: 'Seragam angkatan III',
+        cost: 275000
       }
     ]
     return queryInterface.bulkInsert('GenerationDetails', data, {})

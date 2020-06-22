@@ -1,41 +1,41 @@
 'use strict'
-const faker = require('faker')
+// const faker = require('faker')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const fakeData = [
+    const data = [
       {
         id: 'B1',
         userId: '001',
-        name: faker.internet.userName(),
+        name: 'Sri',
         dateOfBirth: new Date(1988, 6, 11),
         gender: 'P',
-        address: faker.address.streetName(),
-        dorp: faker.lorem.word(),
-        district: faker.address.cityPrefix(),
-        regency: faker.address.city(),
-        province: faker.address.county(),
+        address: 'Jalan Mawar No. 15',
+        dorp: 'Karang Tengah',
+        district: 'Semarang Barat',
+        regency: 'Semarang',
+        province: 'Jawa Tengah',
         postCode: '57222',
-        phoneNumber: faker.phone.phoneNumber(),
-        email: faker.internet.email()
+        phoneNumber: '081345765890',
+        email: 'sri@gmail.com'
       },
       {
         id: 'B2',
         userId: '005',
-        name: faker.internet.userName(),
+        name: 'Joko',
         dateOfBirth: new Date(1985, 11, 11),
         gender: 'L',
-        address: faker.address.streetName(),
-        dorp: faker.lorem.word(),
-        district: faker.address.cityPrefix(),
-        regency: faker.address.city(),
-        province: faker.address.county(),
-        postCode: '57237',
-        phoneNumber: faker.phone.phoneNumber(),
-        email: faker.internet.email()
+        address: 'Jalan Srikandi No. 29',
+        dorp: 'Plombokan',
+        district: 'Semarang Tengah',
+        regency: 'Semarang',
+        province: 'Jawa Tengah',
+        postCode: '57215',
+        phoneNumber: '089763452890',
+        email: 'joko@SpeechGrammarList.com'
       }
     ]
-    return queryInterface.bulkInsert('Boards', fakeData, {})
+    return queryInterface.bulkInsert('Boards', data, {})
   },
 
   down: (queryInterface, Sequelize) => {

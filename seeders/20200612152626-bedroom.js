@@ -11,7 +11,7 @@ module.exports = {
       },
       {
         id: 'BR2',
-        title: 'Jerapaj',
+        title: 'Jerapah',
         gender: 'L',
         capacity: 10
       }

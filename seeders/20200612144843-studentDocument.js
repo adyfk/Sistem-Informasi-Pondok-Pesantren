@@ -5,25 +5,25 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     const fakeData = [
       {
-        studentId: 'S1',
+        studentId: 'RQ.2017.001',
         fcKK: faker.lorem.word(),
         fcKTP: faker.lorem.word(),
         fcAkte: faker.lorem.word()
       },
       {
-        studentId: 'S2',
+        studentId: 'RQ.2017.002',
         fcKK: faker.lorem.word(),
         fcKTP: faker.lorem.word(),
         fcAkte: faker.lorem.word()
       },
       {
-        studentId: 'S3',
+        studentId: 'RQ.2018.001',
         fcKK: faker.lorem.word(),
         fcKTP: faker.lorem.word(),
         fcAkte: faker.lorem.word()
       },
       {
-        studentId: 'S4',
+        studentId: 'RQ.2019.001',
         fcKK: faker.lorem.word(),
         fcKTP: faker.lorem.word(),
         fcAkte: faker.lorem.word()

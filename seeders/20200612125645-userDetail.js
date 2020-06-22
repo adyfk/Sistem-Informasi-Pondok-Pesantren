@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         userId: '006',
-        latestLogin: new Date(2020, 6, 12)
+        latestLogin: new Date(2019, 9, 30)
       }
     ]
     return queryInterface.bulkInsert('UserDetails', data, {})

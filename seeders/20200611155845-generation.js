@@ -1,17 +1,27 @@
 'use strict'
-const faker = require('faker')
-const generationId = ['G1', 'G2']
+// const faker = require('faker')
+// const generationId = ['G1', 'G2']
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const fakeData = Array.from({ length: 2 }).map((data, index) => {
-      return {
-        id: generationId[index],
-        title: faker.lorem.word(),
-        createdAt: new Date(2019, index + 1, 10)
+    const data = [
+      {
+        id: 'G1',
+        title: 'Angkatan I',
+        createdAt: new Date(2016, 3, 10)
+      },
+      {
+        id: 'G2',
+        title: 'Angkatan II',
+        createdAt: new Date(2018, 3, 15)
+      },
+      {
+        id: 'G3',
+        title: 'Angkatan III',
+        createdAt: new Date(2019, 3, 12)
       }
-    })
-    return queryInterface.bulkInsert('Generations', fakeData, {})
+    ]
+    return queryInterface.bulkInsert('Generations', data, {})
   },
 
   down: (queryInterface, Sequelize) => {

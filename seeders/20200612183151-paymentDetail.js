@@ -6,22 +6,22 @@ module.exports = {
       {
         paymentId: 'PY1',
         description: '',
-        paid: 9000000
+        paid: 50000
       },
       {
         paymentId: 'PY2',
         description: '',
-        paid: 1000000
+        paid: 280000
       },
       {
         paymentId: 'PY2',
         description: '',
-        paid: 3000000
+        paid: 325000
       },
       {
         paymentId: 'PY2',
         description: '',
-        paid: 5000000
+        paid: 50000
       }
     ]
     return queryInterface.bulkInsert('PaymentDetails', data, {})
