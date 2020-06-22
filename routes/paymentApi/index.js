@@ -92,7 +92,7 @@ router.post('/generate', auth, async (req, res) => {
       data: {
         total: payments.length
       },
-      message: `${payments.length} Santri di berhasil di generate`
+      message: `${payments.length} santri berhasil digenerate`
     })
   } catch (error) {
     res.json({

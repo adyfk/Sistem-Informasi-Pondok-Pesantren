@@ -18,7 +18,7 @@ router.get('/province', auth, async (req, res) => {
     }
     request(configs, (error, response, body) => {
       if (error) {
-        throw ReqException({ status: 404, data: [], message: 'Province not Found' })
+        throw ReqException({ status: 404, data: [], message: 'Provinsi tidak ditemukan!' })
       }
       const result = JSON.parse(body)
       res.json({
@@ -29,13 +29,13 @@ router.get('/province', auth, async (req, res) => {
     res.status(err.status || 500)
     res.json({
       data: [],
-      message: err.message || 'Gagal mengambil bedroom',
+      message: err.message || 'Gagal mengambil provinsi!',
       messageSystem: checkErrorRequest(err)
     })
   }
 })
 
-router.get('/dorp', auth, async (req, res) => {
+router.get('/regency', auth, async (req, res) => {
   try {
     const configs = {
       url: 'https://dev.farizdotid.com/api/daerahindonesia/kota',
@@ -45,7 +45,7 @@ router.get('/dorp', auth, async (req, res) => {
     }
     request(configs, (error, response, body) => {
       if (error) {
-        throw ReqException({ status: 404, data: [], message: 'Province not Found' })
+        throw ReqException({ status: 404, data: [], message: 'Kabupaten atau kota tidak ditemukan!' })
       }
       const result = JSON.parse(body)
       res.json({
@@ -56,7 +56,7 @@ router.get('/dorp', auth, async (req, res) => {
     res.status(err.status || 500)
     res.json({
       data: [],
-      message: err.message || 'Gagal mengambil bedroom',
+      message: err.message || 'Gagal mengambil kabupaten atau kota!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -67,12 +67,12 @@ router.get('/district', auth, async (req, res) => {
     const configs = {
       url: 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan',
       qs: {
-        id_kota: req.query.dorpId
+        id_kota: req.query.regencyId
       }
     }
     request(configs, (error, response, body) => {
       if (error) {
-        throw ReqException({ status: 404, data: [], message: 'Province not Found' })
+        throw ReqException({ status: 404, data: [], message: 'Kecamatan tidak ditemukan' })
       }
       const result = JSON.parse(body)
       res.json({
@@ -83,7 +83,7 @@ router.get('/district', auth, async (req, res) => {
     res.status(err.status || 500)
     res.json({
       data: [],
-      message: err.message || 'Gagal mengambil bedroom',
+      message: err.message || 'Gagal mengambil kecamatan',
       messageSystem: checkErrorRequest(err)
     })
   }

@@ -11,19 +11,19 @@ router.get('/', async (req, res) => {
     const bedrooms = await models.Bedroom.findAll()
 
     if (!bedrooms) {
-      throw new ReqException({ status: 404, message: 'Bedroom tidak ditemukan' })
+      throw new ReqException({ status: 404, message: 'Kamar tidak ditemukan!' })
     }
 
     res.status(200)
     res.json({
       data: bedrooms,
-      message: 'Berhasil mengambil bedroom'
+      message: 'Berhasil mengambil kamar!'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: [],
-      message: err.message || 'Gagal mengambil bedroom',
+      message: err.message || 'Gagal mengambil kamar!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -32,19 +32,19 @@ router.get('/:id', async (req, res) => {
   try {
     const bedroom = await models.Bedroom.findByPk(req.params.id)
     if (!bedroom) {
-      throw new ReqException({ status: 404, message: 'Bedroom tidak di temukan!' })
+      throw new ReqException({ status: 404, message: 'Kamar tidak ditemukan!' })
     }
 
     res.status(200)
     res.json({
       data: bedroom,
-      message: 'Berhasil meng-ambil bedroom'
+      message: 'Berhasil mengambil kamar!'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal mengambil bedroom',
+      message: err.message || 'Gagal mengambil kamar!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -58,13 +58,13 @@ router.put('/:id', async (req, res) => {
     res.status(200)
     res.json({
       data: bedroom,
-      message: 'Berhasil meng-update bedroom'
+      message: 'Perubahan tersimpan!'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal meng-update bedroom',
+      message: err.message || 'Gagal melakukan perubahan!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -85,13 +85,13 @@ router.post('/', async (req, res) => {
     res.status(200)
     res.json({
       data: Bedroom,
-      message: 'Berhasil menambah bedroom'
+      message: 'Berhasil menambah kamar!'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal menambah bedroom',
+      message: err.message || 'Gagal menambah kamar',
       messageSystem: checkErrorRequest(err)
     })
   }

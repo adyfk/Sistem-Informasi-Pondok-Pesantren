@@ -11,7 +11,7 @@ module.exports = {
       },
       description: {
         allowNull: true,
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING(45)
       },
       paid: {
         type: Sequelize.INTEGER

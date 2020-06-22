@@ -28,7 +28,7 @@ router.get('/student', async (req, res) => {
     if (!student.StudentDetail.status) {
       throw new ReqException({
         status: 404,
-        message: 'Santri telah tidak aktif'
+        message: 'Santri telah tidak aktif!'
       })
     }
 
@@ -51,7 +51,7 @@ router.get('/student', async (req, res) => {
      error?.status || 500
     ).json({
       status: error?.status || 500,
-      message: error.message || 'Gagal ambil santri'
+      message: error.message || 'Gagal mengambil santri!'
     })
   }
 })
@@ -93,7 +93,7 @@ router.put('/:id/checkout', auth, async (req, res) => {
       .status(200)
       .json({
         data: studentClass,
-        message: 'Berhasil check out santri!'
+        message: 'Berhasil checkout santri!'
       })
   } catch (error) {
     res

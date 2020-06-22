@@ -21,7 +21,7 @@ router.get('/latest', auth, auth, async (req, res) => {
       res.status(200)
       res.json({
         data: Generation,
-        message: 'Berhasil mengambil generasi terakhir'
+        message: 'Berhasil mengambil angkatan terakhir!'
       })
     }
 
@@ -29,14 +29,14 @@ router.get('/latest', auth, auth, async (req, res) => {
       res.status(200)
       res.json({
         data: Generation,
-        message: 'Berhasil mengambil generasi terakhir'
+        message: 'Berhasil mengambil angkatan terakhir!'
       })
     }
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal mengambil generasi terakhir',
+      message: err.message || 'Gagal mengambil angkatan terakhir!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -56,7 +56,7 @@ router.post('/generate', auth, async (req, res) => {
       res.status(200)
       res.json({
         data: newGeneration,
-        message: 'Berhasil meng-generate generasi'
+        message: 'Berhasil generate angkatan'
       })
     }
 
@@ -84,13 +84,13 @@ router.post('/generate', auth, async (req, res) => {
     res.status(200)
     res.json({
       data: newGeneration,
-      message: 'Berhasil meng-generate generasi'
+      message: 'Berhasil generate angkatan'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal meng-generate generasi',
+      message: err.message || 'Gagal generate angkatan',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -103,7 +103,7 @@ router.get('/detail', auth, async (req, res) => {
     })
 
     if (!Generation) {
-      throw new ReqException({ status: 400, message: 'Tidak ada data generasi ! Generate terlebih dahulu.' })
+      throw new ReqException({ status: 400, message: 'Tidak ada data angkatan! Generate terlebih dahulu!' })
     }
 
     const GenerationDetail = await models.GenerationDetail.findAll({
@@ -113,7 +113,7 @@ router.get('/detail', auth, async (req, res) => {
     })
 
     if (!GenerationDetail) {
-      throw new ReqException({ status: 404, message: 'Detail generasi tidak di temukan!' })
+      throw new ReqException({ status: 404, message: 'Detail angkatan tidak ditemukan!' })
     }
 
     res.status(200)
@@ -124,7 +124,7 @@ router.get('/detail', auth, async (req, res) => {
     res.status(err.status || 500)
     res.json({
       data: [],
-      message: err.message || 'Gagal mengambil detail generasi',
+      message: err.message || 'Gagal mengambil detail Angkatan!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -137,7 +137,7 @@ router.post('/detail', auth, async (req, res) => {
     })
 
     if (!Generation) {
-      throw new ReqException({ status: 400, message: 'Tidak ada data generasi ! Generate terlebih dahulu.' })
+      throw new ReqException({ status: 400, message: 'Tidak ada data angkatan! Generate terlebih dahulu!' })
     }
 
     // body = {title,description,cost}
@@ -154,13 +154,13 @@ router.post('/detail', auth, async (req, res) => {
     res.status(200)
     res.json({
       data: GenerationDetail,
-      message: 'Berhasil mengambil detail generasi'
+      message: 'Berhasil mengambil detail angkatan!'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal menambah detail generasi',
+      message: err.message || 'Gagal menambah detail angkatan!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -182,13 +182,13 @@ router.put('/detail/:id', auth, async (req, res) => {
     res.status(200)
     res.json({
       data: generationDetail,
-      message: `Berhasil men-update detail generasi ${req.params.id}`
+      message: `Berhasil melakukan perubahan detail angkatan ${req.params.id}`
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || `Gagal men-update detail generasi ${req.params.id}`,
+      message: err.message || `Gagal melakukan perubahan detail angkatan ${req.params.id}`,
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -217,13 +217,13 @@ router.delete('/detail/:id', auth, async (req, res) => {
     res.status(200)
     res.json({
       data: generationDetail.body.data,
-      message: `Berhasil meng-hapus detail generasi ${req.params.id}`
+      message: `Berhasil menghapus detail angkatan ${req.params.id}`
     })
   } catch (err) {
     res.status(err.status || 400)
     res.json({
       data: [],
-      message: err.message || `Gagal meng-hapus detail generasi ${req.params.id}`,
+      message: err.message || `Gagal menghapus detail angkatan ${req.params.id}`,
       messageSystem: checkErrorRequest(err)
     })
   }

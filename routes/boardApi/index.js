@@ -26,21 +26,21 @@ router.get('/', auth, async (req, res) => {
     const boards = await models.Board.paginate(configs)
 
     if (!boards) {
-      throw new ReqException({ status: 404, message: 'Pengurus tidak ditemukan' })
+      throw new ReqException({ status: 404, message: 'Pengurus tidak ditemukan!' })
     }
 
     res
       .status(200)
       .json({
         data: boards,
-        message: 'Berhasil mengambil pengurus'
+        message: 'Berhasil mengambil pengurus!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: [],
-        message: err.message || 'Gagal mengambil pengurus',
+        message: err.message || 'Gagal mengambil pengurus!',
         messageSystem: checkErrorRequest(err)
       })
   }
@@ -59,21 +59,21 @@ router.get('/:id', auth, async (req, res) => {
     })
 
     if (!board) {
-      throw new ReqException({ status: 404, message: 'Pengurus tidak ditemukan' })
+      throw new ReqException({ status: 404, message: 'Pengurus tidak ditemukan!' })
     }
 
     res
       .status(200)
       .json({
         data: board,
-        message: 'Berhasil mengambil Pengurus'
+        message: 'Berhasil mengambil Pengurus!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Gagal mengambil Pengurus',
+        message: err.message || 'Gagal mengambil Pengurus!',
         messageSystem: checkErrorRequest(err)
       })
   }
@@ -99,14 +99,14 @@ router.post('/', auth, async (req, res) => {
       .status(200)
       .json({
         data: board,
-        message: 'Berhasil membuat pengurus'
+        message: 'Berhasil menambah pengurus!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Gagal membuat pengurus',
+        message: err.message || 'Gagal menambah pengurus!',
         messageSystem: checkErrorRequest(err)
       })
   }
@@ -117,21 +117,21 @@ router.put('/:id', auth, async (req, res) => {
   try {
     const board = await models.Board.findByPk(req.params.id)
 
-    if (!board) { throw new ReqException({ status: 404, message: 'Board not found!' }) }
+    if (!board) { throw new ReqException({ status: 404, message: 'Pengurus tidak ditemukan!' }) }
 
     await board.update(req.body)
     res
       .status(200)
       .json({
         data: board,
-        message: 'Success!'
+        message: 'Perubahan tersimpan!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Unable to take board!',
+        message: err.message || 'Gagal melakukan perubahan!',
         messageSystem: checkErrorRequest(err)
       })
   }

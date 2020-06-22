@@ -12,7 +12,7 @@ const router = express.Router()
 router.post('/upload', auth, async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
-      throw new ReqException({ status: 400, message: 'No files were uploaded.' })
+      throw new ReqException({ status: 400, message: 'Tidak ada dokumen yang diupload' })
     }
 
     const { file } = req.files
@@ -21,7 +21,7 @@ router.post('/upload', auth, async (req, res) => {
       type
     } = req.body
 
-    if (!file.name.match(/(.pdf|.PDF)$/g)) { throw new ReqException({ status: 401, message: 'Exstensi file harus PDF' }) }
+    if (!file.name.match(/(.pdf|.PDF)$/g)) { throw new ReqException({ status: 401, message: 'Exstensi dokumen harus PDF' }) }
 
     const fileName = `${type + '-' + name.replace(/ /g, '') + '-' + new Date().getTime()}.pdf`
 
@@ -37,7 +37,7 @@ router.post('/upload', auth, async (req, res) => {
           data: {
             fileName
           },
-          message: 'Sukses upload file.'
+          message: 'Berhasil mengunggah dokumen!'
         })
     })
   } catch (err) {
@@ -45,7 +45,7 @@ router.post('/upload', auth, async (req, res) => {
       .status(err?.status || '500')
       .json({
         data: {},
-        message: err?.message || 'Gagal upload file.'
+        message: err?.message || 'Gagal mengunggah dokumen!'
       })
   }
 })
@@ -63,7 +63,7 @@ router.get('/:fileName', auth, async (req, res) => {
       .status(err?.status || '500')
       .json({
         data: {},
-        message: err?.message || 'Gagal upload file.'
+        message: err?.message || 'Gagal mengambil dokumen!'
       })
   }
 })
@@ -72,13 +72,13 @@ router.delete('/:fileName', auth, async (req, res) => {
 
   try {
     fs.unlinkSync(pathToFile)
-    console.log('Successfully deleted the file.')
+    console.log('Berhasil menghapus dokumen!')
   } catch (err) {
     res
       .status(err?.status || '500')
       .json({
         data: {},
-        message: err?.message || 'Gagal upload file.'
+        message: err?.message || 'Gagal menghapus dokumen!'
       })
   }
 })

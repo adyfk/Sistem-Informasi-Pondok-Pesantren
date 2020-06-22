@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const PaymentDetail = sequelize.define('PaymentDetail', {
     paymentId: DataTypes.STRING(50),
     description: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(45),
       allowNull: true
     },
     paid: DataTypes.INTEGER

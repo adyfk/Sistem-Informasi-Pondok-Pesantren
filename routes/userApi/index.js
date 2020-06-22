@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
       throw new ReqException({
         status: 400,
         message: {
-          username: 'Username anda tidak ditemukan'
+          username: 'Username anda tidak ditemukan!'
         }
       })
     }
@@ -40,14 +40,14 @@ router.post('/login', async (req, res) => {
           id: User.id,
           roleId: User.roleId
         }),
-        message: 'Berhasil login'
+        message: 'Berhasil login!'
       })
     }
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal login',
+      message: err.message || 'Gagal login!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -67,7 +67,7 @@ router.get('/profile', auth, async (req, res) => {
         res.status(200)
         res.json({
           data: mapBoard,
-          message: 'Berhasil menagmbil data profile'
+          message: 'Berhasil menagmbil data profil!'
         })
         break
       }
@@ -82,7 +82,7 @@ router.get('/profile', auth, async (req, res) => {
         res.status(200)
         res.json({
           data: mapStudent,
-          message: 'Berhasil menagmbil data profile'
+          message: 'Berhasil menagmbil data profil!'
         })
         break
       }
@@ -91,7 +91,7 @@ router.get('/profile', auth, async (req, res) => {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal mengambil data profile',
+      message: err.message || 'Gagal mengambil data profil!',
       messageSystem: checkErrorRequest(err)
     })
   }

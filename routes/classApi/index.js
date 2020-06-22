@@ -11,19 +11,19 @@ router.get('/', auth, async (req, res) => {
     const classes = await models.Class.findAll()
 
     if (!classes) {
-      throw new ReqException({ status: 404, message: 'class tidak ditemukan' })
+      throw new ReqException({ status: 404, message: 'Kelas tidak ditemukan!' })
     }
 
     res.status(200)
     res.json({
       data: classes,
-      message: 'Berhasil mengambil class'
+      message: 'Berhasil mengambil kelas!'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: [],
-      message: err.message || 'Gagal mengambil class',
+      message: err.message || 'Gagal mengambil kelas!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -32,19 +32,19 @@ router.get('/:id', auth, async (req, res) => {
   try {
     const classX = await models.Class.findByPk(req.params.id)
     if (!classX) {
-      throw new ReqException({ status: 404, message: 'class tidak di temukan!' })
+      throw new ReqException({ status: 404, message: 'Kelas tidak ditemukan!' })
     }
 
     res.status(200)
     res.json({
       data: classX,
-      message: 'Berhasil meng-ambil class'
+      message: 'Berhasil mengambil kelas!'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal mengambil class',
+      message: err.message || 'Gagal mengambil kelas!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -58,13 +58,13 @@ router.put('/:id', auth, async (req, res) => {
     res.status(200)
     res.json({
       data: classX,
-      message: 'Berhasil meng-update class'
+      message: 'Perubahan tersimpan!'
     })
   } catch (err) {
     res.status(err.status || 500)
     res.json({
       data: {},
-      message: err.message || 'Gagal meng-update class',
+      message: err.message || 'Gagal melakukan perubahan!',
       messageSystem: checkErrorRequest(err)
     })
   }
@@ -79,13 +79,13 @@ router.post('/', auth, async (req, res) => {
     const classX = await models.Class.create(body)
 
     if (!classX) {
-      throw new ReqException({ status: 404, message: 'Gagal membuat class !' })
+      throw new ReqException({ status: 404, message: 'Gagal menambah kelas!' })
     }
 
     res.status(200)
     res.json({
       data: classX,
-      message: 'Berhasil menambah class'
+      message: 'Berhasil menambah kelas'
     })
   } catch (err) {
     res.status(err.status || 500)

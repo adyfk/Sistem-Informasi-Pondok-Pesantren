@@ -28,21 +28,21 @@ router.get('/', auth, async (req, res) => {
     const students = await models.Student.paginate(configs)
 
     if (!students) {
-      throw new ReqException({ status: 404, message: 'Student tidak ditemukan' })
+      throw new ReqException({ status: 404, message: 'Santri tidak ditemukan!' })
     }
 
     res
       .status(200)
       .json({
         data: students,
-        message: 'Berhasil mengambil Student'
+        message: 'Berhasil mengambil santri!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: [],
-        message: err.message || 'Gagal mengambil Student',
+        message: err.message || 'Gagal mengambil santri!',
         messageSystem: checkErrorRequest(err)
       })
   }
@@ -63,21 +63,21 @@ router.get('/:id', auth, async (req, res) => {
     })
 
     if (!student) {
-      throw new ReqException({ status: 404, message: 'Student tidak ditemukan' })
+      throw new ReqException({ status: 404, message: 'Santri tidak ditemukan!' })
     }
 
     res
       .status(200)
       .json({
         data: student,
-        message: 'Berhasil mengambil Student'
+        message: 'Berhasil mengambil santri!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Gagal mengambil Student',
+        message: err.message || 'Gagal mengambil santri!',
         messageSystem: checkErrorRequest(err)
       })
   }
@@ -146,14 +146,14 @@ router.post('/', auth, async (req, res) => {
       .status(200)
       .json({
         data: student,
-        message: 'Berhasil membuat Student'
+        message: 'Berhasil menambah santri!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Gagal membuat Student',
+        message: err.message || 'Gagal menambah santri!',
         messageSystem: checkErrorRequest(err)
       })
     await t.rollback()
@@ -165,21 +165,21 @@ router.put('/:id', auth, async (req, res) => {
   try {
     const student = await models.Student.findByPk(req.params.id)
 
-    if (!student) { throw new ReqException({ status: 404, message: 'Student Not Found' }) }
+    if (!student) { throw new ReqException({ status: 404, message: 'Santri tidak ditemukan!' }) }
 
     await student.update(req.body)
     res
       .status(200)
       .json({
         data: student,
-        message: 'Berhasil mengambil Student'
+        message: 'Berhasil mengambil santri!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Gagal mengambil Student',
+        message: err.message || 'Gagal mengambil santri!',
         messageSystem: checkErrorRequest(err)
       })
   }
@@ -194,21 +194,21 @@ router.put('/:id/parent', auth, async (req, res) => {
       }
     })
 
-    if (!parent) { throw new ReqException({ status: 404, message: 'parent Not Found' }) }
+    if (!parent) { throw new ReqException({ status: 404, message: 'Orang tua tidak ditemukan!' }) }
 
     await parent.update(req.body)
     res
       .status(200)
       .json({
         data: parent,
-        message: 'Berhasil mengambil parent'
+        message: 'Berhasil mengambil data orang tua!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Gagal mengambil parent',
+        message: err.message || 'Gagal mengambil data orang tua!',
         messageSystem: checkErrorRequest(err)
       })
   }
@@ -223,7 +223,7 @@ router.put('/:id/document', auth, async (req, res) => {
       }
     })
 
-    if (!studentDocument) { throw new ReqException({ status: 404, message: 'studentDocument Not Found' }) }
+    if (!studentDocument) { throw new ReqException({ status: 404, message: 'Dokumen santri tidak ditemukan!' }) }
 
     await studentDocument.update(req.body)
 
@@ -231,14 +231,14 @@ router.put('/:id/document', auth, async (req, res) => {
       .status(200)
       .json({
         data: studentDocument,
-        message: 'Berhasil mengambil Dokumen Student'
+        message: 'Berhasil mengambil dokumen santri!'
       })
   } catch (err) {
     res
       .status(err.status || 500)
       .json({
         data: {},
-        message: err.message || 'Gagal mengambil Dokumen Student',
+        message: err.message || 'Gagal mengambil dokumen santri!',
         messageSystem: checkErrorRequest(err)
       })
   }
