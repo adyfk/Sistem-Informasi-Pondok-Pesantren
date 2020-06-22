@@ -3,43 +3,53 @@ import models from '../../models'
 import { uuid1 } from '../../utils/common'
 import auth from '../../middleware/auth'
 import { checkErrorRequest, ReqException } from '../../utils/exception'
-import { Sequelize, Op } from 'sequelize'
+// import { Sequelize, Op } from 'sequelize'
 // import { Op, Sequelize } from 'sequelize'
 
 const router = express.Router()
 
 router.get('/student', async (req, res) => {
   try {
-    const { name = '' } = req.query
-    const condition = {}
+    const { id = '' } = req.query
 
-    if (name) {
-      condition.name = {
-        [Op.regexp]: name
-      }
-    }
-    const student = await models.Student.findAll({
-      where: {
-        [Op.or]: [
-          Sequelize.literal('`StudentClasses`.`studentId` IS NULL'),
-          Sequelize.literal('`StudentClasses`.`studentOut` IS NOT NULL')
-        ],
-        ...condition
-      },
+    const student = await models.Student.findByPk(id, {
       include: [
         {
-          model: models.StudentBedroom,
-          required: false
-        }
+          model: models.StudentClass,
+          required: false,
+          limit: 1,
+          include: ['Class'],
+          order: [['studentIn', 'DESC']]
+        },
+        'StudentDetail'
       ]
     })
 
+    if (!student.StudentDetail.status) {
+      throw new ReqException({
+        status: 404,
+        message: 'Santri telah tidak aktif'
+      })
+    }
+
+    if (!student.StudentClasses[0].studentOut) {
+      const classUsed = student.StudentClasses[0].Class.title
+      throw new ReqException({
+        status: 404,
+        message: `Santri masih menggunakan kelas ${classUsed}`
+      })
+    }
+
     res.json({
-      data: student
+      data: student,
+      message: 'sukses'
     })
   } catch (error) {
-    res.json({
-      error
+    res.status(
+     error?.status || 500
+    ).json({
+      status: error?.status || 500,
+      message: error.message || 'Gagal ambil santri'
     })
   }
 })

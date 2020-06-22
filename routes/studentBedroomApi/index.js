@@ -33,7 +33,7 @@ router.get('/student', async (req, res) => {
       })
     }
 
-    if (student.StudentBedrooms[0].studentOut) {
+    if (!student.StudentBedrooms[0].studentOut) {
       const bedroomUsed = student.StudentBedrooms[0].Bedroom.title
       throw new ReqException({
         status: 404,
