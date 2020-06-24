@@ -58,7 +58,11 @@ router.get('/:id', auth, async (req, res) => {
           attributes: { exclude: ['password'] }
         },
         'StudentDocument',
-        'StudentDetail'
+        {
+          model: models.StudentDetail,
+          include: 'Generation'
+        },
+        'Parent'
       ]
     })
 
