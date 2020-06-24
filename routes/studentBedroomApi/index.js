@@ -71,6 +71,7 @@ router.post('/', auth, async (req, res) => {
       ...req.body
     })
     if (!studentBedroom) { throw new ReqException({ status: 400 }) }
+
     res
       .status(200)
       .json({

@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
 router.get('/profile', auth, async (req, res) => {
   try {
     switch (req.user.roleId) {
-      case '1': {
+      case 'R1': {
         const Board = await getBoardByUserId({ userId: req.user.id })
         const mapBoard = Board.toJSON()
 
@@ -65,26 +65,24 @@ router.get('/profile', auth, async (req, res) => {
         delete mapBoard.BoardDocument
 
         res.status(200)
-        res.json({
+        return res.json({
           data: mapBoard,
           message: 'Berhasil menagmbil data profil!'
         })
-        break
       }
-      case '2': {
+      case 'R2': {
         const Student = await getStudentByUserId({ userId: req.user.id })
 
         const mapStudent = Student.toJSON()
 
         mapStudent.photo = mapStudent.StudentDocument.photo
+        mapStudent.roleId = req.user.roleId
         delete mapStudent.StudentDocument
-
         res.status(200)
-        res.json({
+        return res.json({
           data: mapStudent,
           message: 'Berhasil menagmbil data profil!'
         })
-        break
       }
     }
   } catch (err) {
