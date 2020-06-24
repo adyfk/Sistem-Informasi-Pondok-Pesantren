@@ -2,6 +2,6 @@ POST http://localhost:9000/student-bedroom/ HTTP/1.1
 content-type: application/json
 
 {
-    "studentId":"S1",
+    "studentId":"RQ.2017.001",
     "bedroomId":"BR1"
 }
