@@ -17,13 +17,12 @@ router.post('/upload', auth, async (req, res) => {
 
     const { file } = req.files
     const {
-      name,
-      type
+      name
     } = req.body
 
     if (!file.name.match(/(.pdf|.PDF)$/g)) { throw new ReqException({ status: 401, message: 'Exstensi dokumen harus PDF' }) }
 
-    const fileName = `${type + '-' + name.replace(/ /g, '') + '-' + new Date().getTime()}.pdf`
+    const fileName = `${'student_document-' + name.replace(/ /g, '') + '-' + new Date().getTime()}.pdf`
 
     file.mv(`./private/files/${fileName}`, function (err) {
       if (err) {
@@ -51,13 +50,9 @@ router.post('/upload', auth, async (req, res) => {
 })
 router.get('/:fileName', auth, async (req, res) => {
   try {
-    const splitName = req.params.fileName.split('-')
-    console.log('woi read herer =', splitName)
-    const customFileName = (splitName[1] + ' ' + splitName[0] + ' ' + splitName[2] + ' ' + splitName[3]).caplitalize()
-    console.log('woi read herer =', customFileName)
     const locationFile = `./private/files/${req.params.fileName}`
     res
-      .download(locationFile, customFileName)
+      .download(locationFile)
   } catch (err) {
     res
       .status(err?.status || '500')
