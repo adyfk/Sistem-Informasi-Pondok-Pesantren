@@ -3,7 +3,7 @@ import models, { sequelize } from '../../models'
 import auth from '../../middleware/auth'
 import { uuid1 } from '../../utils/common'
 import { Sequelize, Op } from 'sequelize'
-import { ReqException } from '../../utils/exception'
+import { ReqException, checkErrorRequest } from '../../utils/exception'
 
 const router = express.Router()
 
@@ -30,18 +30,30 @@ router.get('/student', async (req, res) => {
               )`, 'int'),
                 'paid']
             ]
-          }
+          },
+          include: [
+            'PaymentType',
+            {
+              model: models.PaymentDetail,
+              required: false
+            }
+          ]
         }
       ]
     })
-
+    if (payment.length === 0) {
+      throw new ReqException({ message: 'Santri Tidak ditemukan.', status: 404 })
+    }
     res.json({
       data: payment
     })
-  } catch (error) {
-    res.json({
-      error
-    })
+  } catch (err) {
+    res
+      .status(err.status || 500)
+      .json({
+        message: err.message || 'Gagal mengambil santri!',
+        messageSystem: checkErrorRequest(err)
+      })
   }
 })
 

@@ -9,43 +9,29 @@ const router = express.Router()
 // list student
 
 router.get('/', auth, async (req, res) => {
-  try {
-    const { page = 1, paginate = 25, search } = req.query
-    const configs = {
-      page,
-      paginate,
-      order: [['name', 'ASC']]
-    }
-    if (search) {
-      configs.where = {
-        [Op.or]: {
-          name: {
-            [Op.regexp]: search
-          }
+  const { page = 1, paginate = 25, search } = req.query
+  const configs = {
+    page,
+    paginate,
+    order: [['name', 'ASC']]
+  }
+  if (search) {
+    configs.where = {
+      [Op.or]: {
+        name: {
+          [Op.regexp]: search
         }
       }
     }
-    const students = await models.Student.paginate(configs)
-
-    if (!students) {
-      throw new ReqException({ status: 404, message: 'Santri tidak ditemukan!' })
-    }
-
-    res
-      .status(200)
-      .json({
-        data: students,
-        message: 'Berhasil mengambil santri!'
-      })
-  } catch (err) {
-    res
-      .status(err.status || 500)
-      .json({
-        data: [],
-        message: err.message || 'Gagal mengambil santri!',
-        messageSystem: checkErrorRequest(err)
-      })
   }
+  const students = await models.Student.paginate(configs)
+
+  res
+    .status(200)
+    .json({
+      data: students || [],
+      message: 'Berhasil mengambil santri!'
+    })
 })
 // get detail student
 
@@ -89,6 +75,7 @@ router.get('/:id', auth, async (req, res) => {
 
 router.post('/', auth, async (req, res) => {
   const t = await sequelize.transaction()
+  console.log(req.body)
   try {
     const username = req.body.name.replace(/ /g, '') + new Date().getTime()
     const generation = await models.Generation.findOne({
@@ -199,8 +186,8 @@ router.put('/:id/parent', auth, async (req, res) => {
     })
 
     if (!parent) { throw new ReqException({ status: 404, message: 'Orang tua tidak ditemukan!' }) }
-
     await parent.update(req.body)
+
     res
       .status(200)
       .json({

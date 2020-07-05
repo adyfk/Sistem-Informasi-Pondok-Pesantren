@@ -10,6 +10,7 @@ import studentClassApi from './studentClassApi'
 import boardApi from './boardApi'
 import paymantApi from './paymentApi'
 import paymentDetailApi from './paymentDetailApi'
+import dashboardApi from './dashboardApi'
 
 export default function (app) {
   app.use('/user', userApi)
@@ -24,4 +25,5 @@ export default function (app) {
   app.use('/board', boardApi)
   app.use('/payment', paymantApi)
   app.use('/payment-detail', paymentDetailApi)
+  app.use('/dashboard', dashboardApi)
 }

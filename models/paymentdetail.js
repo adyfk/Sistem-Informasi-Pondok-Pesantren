@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     updatedAt: false
   });
-  PaymentDetail.removeAttribute('id')
   PaymentDetail.associate = function (models) {
     PaymentDetail.belongsTo(models.Payment, {
       foreignKey: 'paymentId',
       sourceKey: 'id'
     })
   };
+  PaymentDetail.removeAttribute('id')
   return PaymentDetail;
 };

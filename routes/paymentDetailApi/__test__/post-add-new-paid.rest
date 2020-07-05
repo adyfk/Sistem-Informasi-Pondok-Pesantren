@@ -2,7 +2,7 @@ POST http://localhost:9000/payment-detail HTTP/1.1
 content-type: application/json
 
 {
-    "paymentId":"83702e50-b497-11ea-ba12-e74b1bd07d5f",
+    "paymentId":"PY2",
     "paid":300000
 }
 
